@@ -13,10 +13,10 @@ public class Channel {
     private Integer id;
     private String channelName;
 
-    @ManyToOne
+    @ManyToMany
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToOne
     @JoinTable(
             name = "messages_channel",
             joinColumns = @JoinColumn(name = "channel_id"),
