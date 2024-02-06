@@ -31,8 +31,6 @@ public class MessageContoller {
  */
     @PostMapping("messages")
     public void addMessage(@RequestBody Message message) {
-            message.setDate(LocalDate.now());
-            message.setHour(LocalTime.now());
             messageService.add(message);
 
             //LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -43,7 +41,6 @@ public class MessageContoller {
     public void addMessage(@RequestBody MessageDTO message) {
         messageService.add(message);
     }
-
      */
 
     @GetMapping("messages/{id}")
