@@ -11,22 +11,24 @@ public class MessageService {
     @Autowired
     MessageRepository messageRepository;
 
-    public void add(Message message){
+    public void add(Message message) {
         messageRepository.save(message);
     }
+
     /*
     public void add(MessageDTO messagedto){
         Message message= MessageMapper.convertToMessage(messagedto);
         messageRepository.save(message);
     }
      */
-    public List<Message> getAll(){
+    public List<Message> getAll() {
         return messageRepository.findAll();
     }
-    public Optional<Message> findById(Integer id){
+
+    public Optional<Message> findById(Integer id) {
         return messageRepository.findById(id);
     }
-
-
-
 }
+
+
+

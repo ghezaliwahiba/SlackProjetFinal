@@ -13,24 +13,31 @@ public class Message {
 
     public Message() {
     }
-    public Message( String content) {
+
+    public Message(String content) {
         this.content = content;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public LocalDateTime getDate() {
         return date;
     }
+
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
+
     public String getContent() {
         return content;
     }
+
     public void setContent(String content) {
         this.content = content;
     }
