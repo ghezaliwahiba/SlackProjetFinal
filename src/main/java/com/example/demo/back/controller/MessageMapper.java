@@ -8,9 +8,9 @@ public class MessageMapper {
         //dto.setDate(LocalDateTime.from(entity.getDate().toLocal()));
         return dto;
     }
-    public static Message convertToMessage(MessageDTO dto){
-        Message message=new Message(dto.getDate(), dto.getContent());
-                return message;
-    }
+   // public static Message convertToMessage(MessageDTO dto){
+        //Message message=new Message(dto.getDate(), dto.getContent());
+               // return message;
+    //}
 
 }
