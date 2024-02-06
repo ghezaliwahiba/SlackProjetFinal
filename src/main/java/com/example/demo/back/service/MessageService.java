@@ -13,9 +13,7 @@ public class MessageService {
     @Autowired
     MessageRepository messageRepository;
 
-    public void add(Message message){
-        message.setDate(LocalDate.now());
-        message.setHour(LocalTime.now());
+    public void add(String content, Message message){
         messageRepository.save(message);
     }
     /*
@@ -34,6 +32,7 @@ public class MessageService {
     public void delete(Integer id){
         messageRepository.deleteById(id);
     }
+
     public void update(Integer id, Message message){
         message.setDate(LocalDate.now());
         message.setHour(LocalTime.now());
