@@ -54,7 +54,13 @@ public class MessageContoller {
         else
             return ResponseEntity.ok(opt.get());
     }
-
-
+    @DeleteMapping("messages/{id}")
+    public void delete(@PathVariable("id") Integer id) {
+        messageService.delete(id);
+    }
+    @PutMapping("messages/{id}")
+    public void update(@RequestBody Message message, @PathVariable("id") Integer id) {
+        messageService.update(id, message);
+    }
 
 }
