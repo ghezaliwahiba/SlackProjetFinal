@@ -17,7 +17,8 @@ public class User {
 
     /*
     @ManyToMany
-    // Récupère les canaux*/
+    // Récupère les canaux
+    */
 
     public User() {
     }
