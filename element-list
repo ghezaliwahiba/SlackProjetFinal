@@ -1,0 +1,5 @@
+com.example.demo
+com.example.demo.back.controller
+com.example.demo.back.DAO
+com.example.demo.back.model
+com.example.demo.back.service
