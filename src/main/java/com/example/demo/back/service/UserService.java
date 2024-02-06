@@ -6,29 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
-    UserRepository users;
+    private UserRepository userRepository;
 
     public void add(User user){
-        users.save(user);
+        userRepository.save(user);
     }
 
     public List<User> getAll(){
-        return users.findAll();
+        return userRepository.findAll();
     }
 
-    public void findById(Integer id){
-        users.findById(id);
+    public Optional<User> findById(Integer id){
+        return userRepository.findById(id);
     }
 
     public void update(User user){
-        users.save(user);
+        userRepository.save(user);
     }
 
     public void delete(Integer id){
-        users.deleteById(id);
+        userRepository.deleteById(id);
     }
 }

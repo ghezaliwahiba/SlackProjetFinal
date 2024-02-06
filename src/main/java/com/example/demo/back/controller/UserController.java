@@ -1,2 +1,4 @@
-package com.example.demo.back.controller;public class UserController {
+package com.example.demo.back.controller;
+
+public class UserController {
 }
