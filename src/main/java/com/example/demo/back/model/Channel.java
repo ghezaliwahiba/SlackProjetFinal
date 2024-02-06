@@ -13,7 +13,7 @@ public class Channel {
     private Integer id;
     private String channelName;
 
-    @ManyToMany
+    @ManyToOne
     private List<User> users = new ArrayList<>();
 
     @ManyToMany
