@@ -11,7 +11,7 @@ public class MessageService {
     @Autowired
     MessageRepository messageRepository;
 
-    public void add(Message message) {
+    public void add(String content, Message message) {
         messageRepository.save(message);
     }
 
@@ -40,6 +40,3 @@ public class MessageService {
 
 
 }
-
-
-
