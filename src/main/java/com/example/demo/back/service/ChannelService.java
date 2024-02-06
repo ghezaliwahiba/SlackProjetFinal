@@ -16,7 +16,7 @@ public class ChannelService {
         channelRepository.save(c);
     }
 
-    public List<Channel> getAll(){
+    public List<Channel> findAll(){
         return channelRepository.findAll();
     }
 
