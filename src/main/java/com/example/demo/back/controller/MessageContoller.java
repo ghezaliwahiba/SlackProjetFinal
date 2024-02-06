@@ -4,7 +4,10 @@ import com.example.demo.back.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -28,9 +31,10 @@ public class MessageContoller {
  */
     @PostMapping("messages")
     public void addMessage(@RequestBody Message message) {
-
-        message.setDate(LocalDateTime.now());
+            message.setDate(LocalDate.now());
+            message.setHour(LocalTime.now());
             messageService.add(message);
+
             //LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         }
 

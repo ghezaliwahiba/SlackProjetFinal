@@ -1,6 +1,9 @@
 package com.example.demo.back.model;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="messages")
@@ -8,7 +11,8 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime date;
+    private LocalDate date;
+    private LocalTime hour;
     private String content;
 
     public Message() {
@@ -22,12 +26,21 @@ public class Message {
     public void setId(int id) {
         this.id = id;
     }
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public LocalTime getHour() {
+        return hour;
+    }
+
+    public void setHour(LocalTime hour) {
+        this.hour = hour;
+    }
+
     public String getContent() {
         return content;
     }
