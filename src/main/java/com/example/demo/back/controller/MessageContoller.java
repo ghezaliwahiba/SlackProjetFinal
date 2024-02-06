@@ -54,5 +54,4 @@ public class MessageContoller {
         else
             return ResponseEntity.ok(opt.get());
     }
-
 }
