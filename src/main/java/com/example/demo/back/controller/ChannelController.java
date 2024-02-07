@@ -35,4 +35,12 @@ public class ChannelController {
         else
             return ResponseEntity.ok(opt.get());
     }
+//    @PutMapping("channels/{id}")
+//    public Optional<Channel> update (@PathVariable("id") Integer id){
+//        Optional<Channel> channel = channelService.findById(id);
+//        if(channel.isEmpty())
+//            return ResponseEntity.notFound().build();
+//        else
+//        channelService.update(channel);
+//    }
 }
