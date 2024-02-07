@@ -52,8 +52,6 @@ public class Channel {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
-
-
     @Override
     public String toString() {
         return "Channel{" +
