@@ -24,7 +24,6 @@ public class MessageService {
     public List<Message> getAll() {
         return messageRepository.findAll();
     }
-
     public Optional<Message> findById(Integer id) {
         return messageRepository.findById(id);
     }
