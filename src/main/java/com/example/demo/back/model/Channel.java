@@ -22,9 +22,9 @@ public class Channel {
     public Channel() {
     }
 
-    public Channel(String channelName, List<Message> messages) {
+    public Channel(String channelName) {
         this.channelName = channelName;
-        this.messages = messages;
+        //this.messages = messages;
     }
 
     public Integer getId() {

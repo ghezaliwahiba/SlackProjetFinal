@@ -1,6 +1,7 @@
 package com.example.demo.back.service;
 
 import com.example.demo.back.DAO.UserRepository;
+import com.example.demo.back.model.Channel;
 import com.example.demo.back.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class UserService {
     private UserRepository userRepository;
 
     public void add(User user){
+//        Channel channel = new Channel("Par défaut");
+//        user.add(channel);
         userRepository.save(user);
     }
 

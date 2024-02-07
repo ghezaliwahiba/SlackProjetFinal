@@ -1,5 +1,6 @@
 package com.example.demo.back.controller;
 
+import com.example.demo.back.model.Channel;
 import com.example.demo.back.model.User;
 import com.example.demo.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserController {
     // POST (Created)
     @PostMapping("users")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user) {
         userService.add(user);
     }
 
