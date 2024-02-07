@@ -11,7 +11,7 @@ public class MessageService {
     @Autowired
     MessageRepository messageRepository;
 
-    public void add(Message message) {
+    public void add(String content, Message message) {
         messageRepository.save(message);
     }
 
@@ -24,11 +24,13 @@ public class MessageService {
     public List<Message> getAll() {
         return messageRepository.findAll();
     }
-
     public Optional<Message> findById(Integer id) {
         return messageRepository.findById(id);
     }
+    public void delete(Integer id){
+        messageRepository.deleteById(id);
+    }
+    public void update(Integer id, Message message){
+        messageRepository.save(message);
+    }
 }
-
-
-

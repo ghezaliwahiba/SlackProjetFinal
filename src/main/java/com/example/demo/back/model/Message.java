@@ -10,10 +10,13 @@ import java.util.List;
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
     private LocalDate date;
     private LocalTime hour;
     private String content;
+    @ManyToMany
+    private List<Channel> channels = new ArrayList<>();
 
     @ManyToOne
     private User user;
@@ -68,5 +71,6 @@ public class Message {
 
     public void setUser(User user) {
         this.user = user;
+
     }
 }

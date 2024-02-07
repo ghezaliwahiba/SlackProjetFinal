@@ -21,13 +21,17 @@ public class User {
     @ManyToMany
     private List<Channel> channels = new ArrayList();
 
+    @OneToMany
+    private List<Message> messages = new ArrayList<>();
+
     public User() {
     }
 
-    public User(String userName, boolean isActive, List<Channel> channels) {
+    public User(String userName, boolean isActive, List<Channel> channels, List<Message> messages) {
         this.userName = userName;
         this.isActive = isActive;
         this.channels = channels;
+        this.messages = messages;
     }
 
     public Integer getId() {
@@ -61,6 +65,13 @@ public class User {
     public void setChannels(List<Channel> channels) {
         this.channels = channels;
     }
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     @Override
     public String toString() {
@@ -68,6 +79,8 @@ public class User {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", isActive=" + isActive +
+                ", channels=" + channels +
+                ", messages=" + messages +
                 '}';
     }
 }

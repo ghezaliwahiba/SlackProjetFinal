@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name="channels")
 public class Channel {
@@ -17,6 +18,7 @@ public class Channel {
 //    @ManyToMany
 //    private List<User> users = new ArrayList<>();
 
+
     @OneToMany
     private List<Message> messages = new ArrayList<>();
 
@@ -26,7 +28,6 @@ public class Channel {
     public Channel(String channelName, List<Message> messages) {
         this.channelName = channelName;
         this.messages = messages;
-    }
 
     public Integer getId() {
         return id;
@@ -51,6 +52,7 @@ public class Channel {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+
 
     @Override
     public String toString() {
