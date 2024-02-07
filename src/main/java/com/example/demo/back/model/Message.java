@@ -1,4 +1,5 @@
 package com.example.demo.back.model;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,6 +19,10 @@ public class Message {
 
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    @JsonIgnoreProperties("messages")
+    private Channel channel;
 
     public Message() {
     }
@@ -70,5 +75,25 @@ public class Message {
     public void setUser(User user) {
         this.user = user;
 
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", date=" + date +
+                ", hour=" + hour +
+                ", content='" + content + '\'' +
+                ", user=" + user +
+                ", channel=" + channel +
+                '}';
     }
 }

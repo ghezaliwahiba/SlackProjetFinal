@@ -1,5 +1,6 @@
 package com.example.demo.back.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,16 +20,16 @@ public class User {
     private boolean isActive;
 
     @ManyToMany
+    @JsonIgnoreProperties("messages")
     private List<Channel> channels = new ArrayList();
 
-
     public User() {
+        this.isActive = true;
     }
 
-    public User(String userName, boolean isActive, List<Channel> channels, List<Message> messages) {
+    public User(String userName) {
+        this();
         this.userName = userName;
-        this.isActive = isActive;
-        this.channels = channels;
     }
 
     public Integer getId() {
@@ -63,7 +64,9 @@ public class User {
         this.channels = channels;
     }
 
-
+    public void add(Channel channel){
+        channels.add(channel);
+    }
 
     @Override
     public String toString() {
