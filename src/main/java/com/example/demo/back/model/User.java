@@ -2,6 +2,9 @@ package com.example.demo.back.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,19 +16,18 @@ public class User {
     private String userName;
 
     @Column(name = "is_active")
-    private boolean isActive; // par défaut il est en false ?
+    private boolean isActive;
 
-    /*
     @ManyToMany
-    // Récupère les canaux
-    */
+    private List<Channel> channels = new ArrayList();
 
     public User() {
     }
 
-    public User(String userName, boolean isActive) {
+    public User(String userName, boolean isActive, List<Channel> channels) {
         this.userName = userName;
         this.isActive = isActive;
+        this.channels = channels;
     }
 
     public Integer getId() {
@@ -51,6 +53,20 @@ public class User {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public List<Channel> getChannels() {
+        return channels;
+    }
+
+    public void setChannels(List<Channel> channels) {
+        this.channels = channels;
+    }
+
+    /* A mmtre plutôt dans Channel
+    public void add(User user){
+        channels.add(user);
+    }
+     */
 
     @Override
     public String toString() {
