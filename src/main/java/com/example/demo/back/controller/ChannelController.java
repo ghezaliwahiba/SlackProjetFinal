@@ -37,7 +37,7 @@ public class ChannelController {
             return ResponseEntity.ok(opt.get());
     }
 
-@PutMapping("users/{id}")
+@PutMapping("channels/{id}")
 public ResponseEntity<Channel> update(@PathVariable("id") Integer id,
                                    @RequestBody Channel channel){
     if(!channel.getId().equals(id)){

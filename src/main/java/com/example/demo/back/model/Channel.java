@@ -27,7 +27,7 @@ public class Channel {
 
     public Channel(String channelName, List<Message> messages) {
         this.channelName = channelName;
-        this.messages = messages;
+        this.messages = messages;}
 
     public Integer getId() {
         return id;
