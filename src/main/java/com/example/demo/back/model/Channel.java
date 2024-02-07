@@ -12,14 +12,11 @@ public class Channel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String channelName;
 
-// Dans un second : besoin lorque l'on veut renseigner le détail du canal (utilisateur)
-//    @ManyToMany
-//    private List<User> users = new ArrayList<>();
-
-
     @OneToMany
+    @JoinColumn(name = "channel_id")
     private List<Message> messages = new ArrayList<>();
 
     public Channel() {
@@ -27,7 +24,8 @@ public class Channel {
 
     public Channel(String channelName, List<Message> messages) {
         this.channelName = channelName;
-        this.messages = messages;}
+        this.messages = messages;
+    }
 
     public Integer getId() {
         return id;
@@ -61,3 +59,9 @@ public class Channel {
                 '}';
     }
 }
+
+/*
+ Dans un second : besoin lorque l'on veut renseigner le détail du canal (utilisateur)
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
+ */
