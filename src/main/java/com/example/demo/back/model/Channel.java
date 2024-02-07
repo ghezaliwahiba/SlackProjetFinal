@@ -14,16 +14,20 @@ public class Channel {
     private Integer id;
     private String channelName;
 
-    @ManyToMany
-    private List<User> users = new ArrayList<>();
+// Dans un second : besoin lorque l'on veut renseigner le détail du canal (utilisateur)
+//    @ManyToMany
+//    private List<User> users = new ArrayList<>();
+
+
+    @OneToMany
+    private List<Message> messages = new ArrayList<>();
 
     public Channel() {
     }
 
-    public Channel(String channelName, List<User> users) {
+    public Channel(String channelName, List<Message> messages) {
         this.channelName = channelName;
-        this.users = users;
-    }
+        this.messages = messages;
 
     public Integer getId() {
         return id;
@@ -41,12 +45,12 @@ public class Channel {
         this.channelName = channelName;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
 
@@ -55,8 +59,7 @@ public class Channel {
         return "Channel{" +
                 "id=" + id +
                 ", channelName='" + channelName + '\'' +
-                ", users=" + users +
-
+                ", messages=" + messages +
                 '}';
     }
 }

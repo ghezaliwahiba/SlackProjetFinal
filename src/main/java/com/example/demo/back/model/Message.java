@@ -18,14 +18,17 @@ public class Message {
     @ManyToMany
     private List<Channel> channels = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     public Message() {
     }
 
-    public Message(LocalDate date, LocalTime hour, String content, List<Channel> channels) {
+    public Message(LocalDate date, LocalTime hour, String content, User user) {
         this.date = date;
         this.hour = hour;
         this.content = content;
-        this.channels = channels;
+        this.user = user;
     }
 
     public Message(String content) {
@@ -62,22 +65,12 @@ public class Message {
         this.content = content;
     }
 
-    public List<Channel> getChannels() {
-        return channels;
+    public User getUser() {
+        return user;
     }
 
-    public void setChannels(List<Channel> channels) {
-        this.channels = channels;
-    }
+    public void setUser(User user) {
+        this.user = user;
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", date=" + date +
-                ", hour=" + hour +
-                ", content='" + content + '\'' +
-                ", channels=" + channels +
-                '}';
     }
 }
