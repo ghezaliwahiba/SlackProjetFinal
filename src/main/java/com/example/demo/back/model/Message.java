@@ -15,8 +15,6 @@ public class Message {
     private LocalDate date;
     private LocalTime hour;
     private String content;
-    @ManyToMany
-    private List<Channel> channels = new ArrayList<>();
 
     @ManyToOne
     private User user;
