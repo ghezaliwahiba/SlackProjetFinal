@@ -62,12 +62,6 @@ public class User {
         this.channels = channels;
     }
 
-    /* A mmtre plutôt dans Channel
-    public void add(User user){
-        channels.add(user);
-    }
-     */
-
     @Override
     public String toString() {
         return "User{" +

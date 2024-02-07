@@ -2,6 +2,8 @@ package com.example.demo.back.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="messages")
@@ -13,7 +15,17 @@ public class Message {
     private LocalTime hour;
     private String content;
 
+    @ManyToOne
+    private User user;
+
     public Message() {
+    }
+
+    public Message(LocalDate date, LocalTime hour, String content, User user) {
+        this.date = date;
+        this.hour = hour;
+        this.content = content;
+        this.user = user;
     }
 
     public Message(String content) {
@@ -48,5 +60,13 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
