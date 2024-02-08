@@ -27,10 +27,6 @@ public class Message {
     public Message() {
     }
 
-    public Message(LocalDate date, LocalTime hour, String content) {
-        this.content = content;
-    }
-
     public Message(String content) {
         this.content = content;
     }
