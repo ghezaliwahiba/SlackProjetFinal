@@ -36,7 +36,6 @@ public class MessageService {
         messageRepository.deleteById(id);
     }
     public void update(Message message){
-        message.setDate(LocalDate.now());
         message.setHour(LocalTime.now());
         messageRepository.save(message);
     }
