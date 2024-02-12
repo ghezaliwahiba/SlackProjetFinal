@@ -1,11 +1,14 @@
 package com.example.demo.back.service;
 
+import com.example.demo.back.DAO.ChannelRepository;
 import com.example.demo.back.DAO.UserRepository;
 import com.example.demo.back.model.Channel;
+import com.example.demo.back.model.Message;
 import com.example.demo.back.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +18,6 @@ public class UserService {
     private UserRepository userRepository;
 
     public void add(User user){
-//        Channel channel = new Channel("Par défaut");
-//        user.add(channel);
         userRepository.save(user);
     }
 
@@ -35,4 +36,5 @@ public class UserService {
     public void delete(Integer id){
         userRepository.deleteById(id);
     }
+
 }

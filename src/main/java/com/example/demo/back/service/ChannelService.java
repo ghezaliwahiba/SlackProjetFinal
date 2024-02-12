@@ -2,6 +2,7 @@ package com.example.demo.back.service;
 
 import com.example.demo.back.DAO.ChannelRepository;
 import com.example.demo.back.model.Channel;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,13 @@ import java.util.Optional;
 
 @Service
 public class ChannelService {
+
     @Autowired
     private ChannelRepository channelRepository;
-    public void add( Channel c){
-        channelRepository.save(c);
-    }
+
+    public void add( Channel c) {
+            channelRepository.save(c);
+        }
 
     public List<Channel> findAll(){
         return channelRepository.findAll();

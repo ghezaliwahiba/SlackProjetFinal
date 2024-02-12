@@ -20,7 +20,7 @@ public class MessageContoller {
     }
 
     @PostMapping("messages")
-    public ResponseEntity<String> login(@RequestBody Message message){
+    public ResponseEntity<Message> login(@RequestBody Message message){
         if(message.getContent().isEmpty())
             return ResponseEntity
                     .badRequest()

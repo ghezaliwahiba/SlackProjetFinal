@@ -1,13 +1,16 @@
 package com.example.demo.back.controller;
 
 import com.example.demo.back.model.Channel;
+import com.example.demo.back.model.Message;
 import com.example.demo.back.model.User;
+import com.example.demo.back.service.ChannelService;
 import com.example.demo.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +18,22 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    ChannelService channelService;
+/*
+    public UserController() {
+        // Ajout d'un canal général
 
+        List<Message> generalChannel = new ArrayList<>();
+        userService.put("general", generalChannel);
+    }
+*/
     // POST (Created)
     @PostMapping("users")
     @ResponseStatus(HttpStatus.CREATED)
     public void addUser(@RequestBody User user) {
         userService.add(user);
+        //Channel channelGeneral=new Channel();
     }
 
     // GET (All)

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +14,15 @@ import java.util.Optional;
 public class MessageService {
     @Autowired
     MessageRepository messageRepository;
-
     public void add(Message message) {
         message.setDate(LocalDate.now());
-        message.setHour(LocalTime.now());
+        // Créer un objet LocalTime représentant l'heure actuelle
+        LocalTime now = LocalTime.now();
+        // Définir le format de date et d'heure souhaité
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        // Formater l'heure actuelle selon le format spécifié
+        String formattedTime = now.format(formatter);
+        message.setHour(LocalTime.parse(formattedTime));
         messageRepository.save(message);
     }
 
