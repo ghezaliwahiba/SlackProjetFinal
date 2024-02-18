@@ -26,7 +26,6 @@ public class Channel {
     // Constructeur avec un paramètre pour initialiser le nom du canal
     public Channel(String channelName) {
         this.channelName = channelName;
-        //this.messages = messages;
     }
 
     public Integer getId() {

@@ -17,9 +17,11 @@ public class Message {
     private LocalTime hour;
     private String content;
 
+    // Utilisateur qui a envoyé le message
     @ManyToOne
     private User user;
 
+    // Canal auquel le message appartient
     @ManyToOne
     @JsonIgnoreProperties("messages")
     private Channel channel;
