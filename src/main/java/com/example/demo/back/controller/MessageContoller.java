@@ -16,7 +16,7 @@ public class MessageContoller {
     MessageService messageService;
     @GetMapping("messages")
     public List<Message> findAll(){
-        return messageService.getAll();
+        return messageService.findAll();
     }
 
     @PostMapping("messages")

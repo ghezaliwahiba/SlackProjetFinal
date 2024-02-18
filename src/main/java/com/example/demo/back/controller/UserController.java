@@ -39,7 +39,7 @@ public class UserController {
     // GET (All)
     @GetMapping("users")
     public List<User> findAll(){
-        return userService.getAll();
+        return userService.findAll();
     }
 
     // GET (id)

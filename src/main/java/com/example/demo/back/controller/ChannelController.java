@@ -21,13 +21,13 @@ public class ChannelController {
     ChannelService channelService;
 
     @GetMapping("channels")
-    public List<Channel> findAll(){
+    public List<Channel> findAll() {
         return channelService.findAll();
     }
 
     @PostMapping("channels")
-    public ResponseEntity<Channel> login(@RequestBody Channel channel){
-        if(channel.getChannelName().isEmpty()) {
+    public ResponseEntity<Channel> login(@RequestBody Channel channel) {
+        if (channel.getChannelName().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }/*
         // Vérifier si le nom du canal à ajouter est le même que celui du canal général
@@ -35,48 +35,48 @@ public class ChannelController {
             // Si le canal général existe déjà, retourner une réponse BadRequest
             return ResponseEntity.badRequest().build();
         }
-        */
-        else {
+        */ else {
             channelService.add(channel);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
     }
 
     @GetMapping("channels/{id}")
-    public ResponseEntity<Channel> findById(@PathVariable("id") Integer id){
+    public ResponseEntity<Channel> findById(@PathVariable("id") Integer id) {
         Optional<Channel> opt = channelService.findById(id);
-        if(opt.isEmpty())
+        if (opt.isEmpty())
             return ResponseEntity.notFound().build();
         else
             return ResponseEntity.ok(opt.get());
     }
 
-@PutMapping("channels/{id}")
-public ResponseEntity<Channel> update(@PathVariable("id") Integer id,
-                                   @RequestBody Channel channel){
-    if(!channel.getId().equals(id)) {
-        return ResponseEntity
-                .notFound()
-                .build();
-    }
-    //15 c'est l'id du canal général sur ma base donnée cette id c'est on fonction de votre le canal général
-    if(id.equals(15)) {
-        return ResponseEntity.badRequest().build();
-    }
-        else {
-        channelService.update(channel);
-        return ResponseEntity.ok().build();
-    }
-}
-    @DeleteMapping("channels/{id}")
-    public ResponseEntity<Message> delete(@PathVariable("id") Integer id,
-                                          @RequestBody Channel channel){
-        Optional<Channel> opt = channelService.findById(id);
-        if (opt.isEmpty()){
+    @PutMapping("channels/{id}")
+    public ResponseEntity<Channel> update(@PathVariable("id") Integer id,
+                                          @RequestBody Channel channel) {
+        if (!channel.getId().equals(id)) {
             return ResponseEntity
                     .notFound()
                     .build();
-        }    if (channel.getId()!=id){
+        }
+        //15 c'est l'id du canal général sur ma base donnée cette id c'est on fonction de votre le canal général
+        if (id.equals(15)) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            channelService.update(channel);
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @DeleteMapping("channels/{id}")
+    public ResponseEntity<Message> delete(@PathVariable("id") Integer id,
+                                          @RequestBody Channel channel) {
+        Optional<Channel> opt = channelService.findById(id);
+        if (opt.isEmpty()) {
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        }
+        if (channel.getId() != id) {
 
             return ResponseEntity
                     .notFound()
@@ -86,8 +86,8 @@ public ResponseEntity<Channel> update(@PathVariable("id") Integer id,
         Channel existingChannel = opt.get();
         if (existingChannel.getChannelName().equals("Géneral")) {
 
-         return ResponseEntity.badRequest().build();
-        }else
+            return ResponseEntity.badRequest().build();
+        } else
             channelService.delete(channel.getId());
         return ResponseEntity.ok().build();
     }
