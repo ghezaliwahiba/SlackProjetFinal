@@ -15,6 +15,7 @@ public class Channel {
 
     private String channelName;
 
+    // Liste des messages associés à ce canal
     @OneToMany
     @JoinColumn(name = "channel_id")
     private List<Message> messages = new ArrayList<>();
@@ -22,6 +23,7 @@ public class Channel {
     public Channel() {
     }
 
+    // Constructeur avec un paramètre pour initialiser le nom du canal
     public Channel(String channelName) {
         this.channelName = channelName;
         //this.messages = messages;
