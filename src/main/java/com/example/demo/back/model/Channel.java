@@ -13,6 +13,7 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "channel_name", length = 30)
     private String channelName;
 
     // Liste des messages associés à ce canal
