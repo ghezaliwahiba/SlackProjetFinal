@@ -1,18 +1,18 @@
 package com.example.demo.back.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="messages")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private int id;
     private LocalDate date;
     private LocalTime hour;
     private String content;
@@ -33,13 +33,14 @@ public class Message {
         this.content = content;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+
     public LocalDate getDate() {
         return date;
     }
