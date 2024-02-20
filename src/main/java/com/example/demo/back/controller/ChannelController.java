@@ -37,7 +37,7 @@ public class ChannelController {
         if (channel.getChannelName().isEmpty()) {
             return ResponseEntity
                     .badRequest()
-                    .build();
+                    .body("Le nom du canal ne peut pas être vide.");
         }/*
         // Vérifier si le nom du canal à ajouter est le même que celui du canal général
         if(channelService.equals(channel.getChannelName())) {
@@ -59,7 +59,7 @@ public class ChannelController {
     @GetMapping("channels/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         Optional<Channel> opt = channelService.findById(id);
-        if (opt.isEmpty())
+        if (opt.isEmpty()) // Gérer si l'ID n'existe pas ?
             return ResponseEntity
                     .notFound()
                     .build();
@@ -89,7 +89,7 @@ public class ChannelController {
         if (id.equals(1)) {
             return ResponseEntity
                     .badRequest()
-                    .build();
+                    .body("Impossible de mettre à jour le canal général");
         } else {
             channelService.update(channel);
             return ResponseEntity.ok().build();
@@ -107,16 +107,19 @@ public class ChannelController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer id,
                                           @RequestBody Channel channel) {
         Optional<Channel> opt = channelService.findById(id);
-        Channel existingChannel = opt.get();
-
-        if (opt.isEmpty() && !existingChannel.getId().equals(channel.getId())) {
+        if (opt.isEmpty()) {
             return ResponseEntity
                     .notFound()
                     .build();
+        }
+
+        Channel existingChannel = opt.get(); // Postman: soucis de suppression
+        if (existingChannel.getId().equals(channel.getId())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Impossible de supprimer le canal général.");
         } else
             channelService.delete(channel.getId());
-        return ResponseEntity
-                .ok()
-                .build();
+        return ResponseEntity.ok().build();
     }
 }

@@ -38,7 +38,7 @@ public class UserController {
         if (user.getUserName().isEmpty()) {
             return ResponseEntity
                     .badRequest()
-                    .build();
+                    .body("Le nom ne peut pas être vide.");
         } else {
             userService.add(user);
             return ResponseEntity.status(HttpStatus.CREATED).build();

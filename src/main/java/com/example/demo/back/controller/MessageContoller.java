@@ -36,7 +36,7 @@ public class MessageContoller {
         if (message.getContent().isEmpty())
             return ResponseEntity
                     .badRequest()
-                    .build();
+                    .body("Le contenu du message ne peut pas être vide.");
         else {
             messageService.add(message);
             return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -98,7 +98,7 @@ public class MessageContoller {
             messageService.delete(message.getId());
         return ResponseEntity.ok().build();
     }
-
+}
 
 /*
     @DeleteMapping("messages/{id}")
@@ -148,5 +148,3 @@ public class MessageContoller {
     }
 
      */
-
-}
