@@ -1,52 +1,60 @@
 package com.example.demo.back.controller;
 
-import com.example.demo.back.model.Channel;
-import com.example.demo.back.model.Message;
 import com.example.demo.back.model.User;
-import com.example.demo.back.service.ChannelService;
 import com.example.demo.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class UserController {
+
     @Autowired
     UserService userService;
-    @Autowired
-    ChannelService channelService;
-/*
-    public UserController() {
-        // Ajout d'un canal général
 
-        List<Message> generalChannel = new ArrayList<>();
-        userService.put("general", generalChannel);
+    /**
+     * Récupère tous les utilisateurs.
+     *
+     * @return Une liste de tous les utilisateurs.
+     */
+    @GetMapping("users")
+    public List<User> findAll() {
+        return userService.findAll();
     }
-*/
-    // POST (Created)
+
+    /**
+     * Ajoute un nouvel utilisateur.
+     *
+     * @param user L'utilisateur à ajouter.
+     * @return Une réponse HTTP indiquant le succès ou l'échec de l'ajout.
+     */
     @PostMapping("users")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addUser(@RequestBody User user) {
-        userService.add(user);
-        //Channel channelGeneral=new Channel();
+    public ResponseEntity<?> addUser(@RequestBody User user) {
+        if (user.getUserName().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Le nom ne peut pas être vide.");
+        } else {
+            userService.add(user);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
     }
 
-    // GET (All)
-    @GetMapping("users")
-    public List<User> findAll(){
-        return userService.getAll();
-    }
-
-    // GET (id)
+    /**
+     * Récupère un utilisateur par son identifiant.
+     *
+     * @param id L'identifiant de l'utilisateur à récupérer.
+     * @return Réponse HTTP contenant l'utilisateur s'il est trouvé, sinon retourne une réponse NotFound.
+     */
     @GetMapping("users/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") Integer id){
+    public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         Optional<User> opt = userService.findById(id);
-        if(opt.isEmpty()){
+        if (opt.isEmpty()) {
             return ResponseEntity
                     .notFound()
                     .build();
@@ -56,11 +64,17 @@ public class UserController {
         }
     }
 
-    // PUT (Update)
+    /**
+     * Met à jour un utilisateur existant.
+     *
+     * @param id   L'identifiant de l'utilisateur à mettre à jour.
+     * @param user Le nouvel utilisateur.
+     * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
+     */
     @PutMapping("users/{id}")
-    public ResponseEntity<User> update(@PathVariable("id") Integer id,
-                                       @RequestBody User user){
-        if(!user.getId().equals(id)){
+    public ResponseEntity<?> update(@PathVariable("id") Integer id,
+                                    @RequestBody User user) {
+        if (!user.getId().equals(id)) {
             return ResponseEntity
                     .notFound()
                     .build();
@@ -70,10 +84,15 @@ public class UserController {
         }
     }
 
-    // DELETE
+    /**
+     * Supprime un utilisateur existant.
+     *
+     * @param id L'identifiant de l'utilisateur à supprimer.
+     * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
+     */
     @DeleteMapping("users/{id}")
-    public ResponseEntity<User> delete(@PathVariable("id") Integer id){
-        if(userService.findById(id).isPresent()){
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        if (userService.findById(id).isPresent()) {
             userService.delete(id);
             return ResponseEntity.ok().build();
         } else {
@@ -81,3 +100,15 @@ public class UserController {
         }
     }
 }
+
+/*
+    @Autowired
+    ChannelService channelService;
+
+    public UserController() {
+        // Ajout d'un canal général
+
+        List<Message> generalChannel = new ArrayList<>();
+        userService.put("general", generalChannel);
+    }
+*/

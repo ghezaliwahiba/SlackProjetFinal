@@ -19,6 +19,7 @@ public class User {
     @Column(name = "is_active")
     private boolean isActive;
 
+    // Liste des canaux auxquels l'utilisateur est inscrit
     @ManyToMany
     @JsonIgnoreProperties("messages")
     private List<Channel> channels = new ArrayList();
