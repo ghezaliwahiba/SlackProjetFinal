@@ -1,3 +1,4 @@
 export interface Channel {
-// à remplir
+  id: number;
+  channelName?: string;
 }
