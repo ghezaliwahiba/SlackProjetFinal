@@ -4,3 +4,6 @@ li {
 ul {
   list-style-type: none;
 }
+.nav-link {
+  color: var(--primary-color-blanc);
+}
