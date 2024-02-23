@@ -9,7 +9,6 @@ import { Message } from '../../core/models/message';
 
 export class MessagesService {
   apiUrl: String = 'http://localhost:8080/messages';
-  apiUrl: String = 'http://localhost:8080/messages';
 
   constructor(private http: HttpClient) {}
 

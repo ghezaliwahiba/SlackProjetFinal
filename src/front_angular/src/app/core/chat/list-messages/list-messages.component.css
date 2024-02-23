@@ -34,7 +34,7 @@
   margin-top: 10px;
 }
 
-// Animation code
+/* Animation code */
 .message-component:hover {
 background-color: red;
 }
