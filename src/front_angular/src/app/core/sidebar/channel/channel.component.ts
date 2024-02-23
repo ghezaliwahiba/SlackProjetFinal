@@ -16,6 +16,8 @@ export class ChannelComponent implements OnInit {
   longeurChannels!: number;
   showBoutonGénéral: boolean = false;
   showButtons: boolean = true;
+  showInputSubmit: boolean = false;
+  showForm: boolean = false;
 
   // Définir une structure de données pour stocker l'état de l'input
   showInput: { [key: string]: boolean } = {};
@@ -23,9 +25,6 @@ export class ChannelComponent implements OnInit {
   // Méthode pour mettre à jour ou annuler l'input
   toggleInput(channelId: string) {
     this.showInput[channelId] = !this.showInput[channelId];
-  }
-  toggleButtons() {
-    this.showButtons = !this.showButtons;
   }
 
   constructor(private channelService: ChannelServiceComponent) {}
