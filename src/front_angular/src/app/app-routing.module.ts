@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChannelComponent } from './components/channel/channel.component';
+import { ChannelComponent } from './core/sidebar/channel/channel.component';
+
 
 const routes: Routes = [{ path: 'channels', component: ChannelComponent }];
 

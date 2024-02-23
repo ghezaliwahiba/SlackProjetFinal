@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Channel } from '../../core/models/channel';
+
+import { Component, OnInit } from '@angular/core';
+import { Channel } from '../../models/channel';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ChannelServiceComponent } from '../../service/channel.service/channel.service.component';
+import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 
 @Component({
   //  spécification du sélecteur (selector),
@@ -11,12 +12,11 @@ import { ChannelServiceComponent } from '../../service/channel.service/channel.s
   //le chemin vers le fichier de style
   styleUrl: './channel.component.css',
 })
-export class ChannelComponent {
+export class ChannelComponent implements OnInit {
   listChannels: Channel[] = [];
   longeurChannels!: number;
 
   constructor(private channelService: ChannelServiceComponent) {}
-
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
   ngOnInit(): void {
     //on appelle la méthode getAllChannels() pour récupérer toutes les chaînes.
@@ -59,14 +59,4 @@ export class ChannelComponent {
       this.getAllChannels();
     });
   }
-
-  /*
-  updateChannel(channelName: string): void {
-    const newChannel: Channel = { id: this.longeurChannels + 1, channelName };
-    this.channelService.updateChannel(newChannel).subscribe(() => {
-      this.getAllChannels();
-      console.log(newChannel);
-    });
-  }
-  */
 }
