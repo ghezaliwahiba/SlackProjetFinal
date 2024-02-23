@@ -1,0 +1,19 @@
+<h1>Liste des messages tests</h1>
+
+<div *ngFor="let message of messagesList" class="message-component">
+  <img loading="lazy" srcset="../../../../assets/photo.jpg" class="img" />
+
+  <div class="name-message">
+    <div class="name-hour">
+      <p class="text-name">{{ message.user.userName }}</p>
+      <p class="note">{{ message.hour }}</p>
+    </div>
+    <p class="text-message">{{ message.content }}</p>
+  </div>
+</div>
+
+<!--
+  uppercase
+  date:'mm:ss'
+| message.hourdatePipe.transform(date:'mm:ss')
+-->

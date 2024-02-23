@@ -21,6 +21,7 @@ public class UserController {
      *
      * @return Une liste de tous les utilisateurs.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("users")
     public List<User> findAll() {
         return userService.findAll();
@@ -32,6 +33,7 @@ public class UserController {
      * @param user L'utilisateur à ajouter.
      * @return Une réponse HTTP indiquant le succès ou l'échec de l'ajout.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("users")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> addUser(@RequestBody User user) {
@@ -51,6 +53,7 @@ public class UserController {
      * @param id L'identifiant de l'utilisateur à récupérer.
      * @return Réponse HTTP contenant l'utilisateur s'il est trouvé, sinon retourne une réponse NotFound.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("users/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         Optional<User> opt = userService.findById(id);
@@ -71,6 +74,7 @@ public class UserController {
      * @param user Le nouvel utilisateur.
      * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("users/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id,
                                     @RequestBody User user) {
@@ -90,6 +94,7 @@ public class UserController {
      * @param id L'identifiant de l'utilisateur à supprimer.
      * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("users/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
         if (userService.findById(id).isPresent()) {
