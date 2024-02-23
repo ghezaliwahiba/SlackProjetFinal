@@ -21,6 +21,9 @@ public class ChannelController {
      *
      * @return Une liste de tous les canaux.
      */
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("channels")
     public List<Channel> findAll() {
         return channelService.findAll();
@@ -32,6 +35,7 @@ public class ChannelController {
      * @param channel Le canal à ajouter.
      * @return Une réponse HTTP indiquant le succès ou l'échec de l'ajout.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("channels")
     public ResponseEntity<?> addChannel(@RequestBody Channel channel) {
         if (channel.getChannelName().isEmpty()) {
@@ -56,13 +60,18 @@ public class ChannelController {
      * @param id L'identifiant du canal à récupérer.
      * @return une Réponse HTTP contenant le canal s'il est trouvé, sinon retourn une réponse NotFound.
      */
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("channels/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         Optional<Channel> opt = channelService.findById(id);
-        if (opt.isEmpty()) // Gérer si l'ID n'existe pas ?
+        if (opt.isEmpty()) {// Gérer si l'ID n'existe pas ?
             return ResponseEntity
                     .notFound()
                     .build();
+        } if(id.equals(15)) {
+            return ResponseEntity.badRequest().build();
+        }
         else
             return ResponseEntity.ok(opt.get());
     }
@@ -74,6 +83,7 @@ public class ChannelController {
      * @param channel Le nouveau canal avec les informations mises à jour.
      * @return Une réponse HTTP indiquant le succès ou l'échec de la mise à jour.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("channels/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id,
                                           @RequestBody Channel channel) {
@@ -86,7 +96,7 @@ public class ChannelController {
         /* Peut-être en base de donnée générer le canal général par défaut par l'id: 1
         "Impossible de mettre à jour le canal général."*/
         // Retourne une réponse BadRequest si l'ID correspond au canal général
-        if (id.equals(1)) {
+        if (id.equals(12)) {
             return ResponseEntity
                     .badRequest()
                     .body("Impossible de mettre à jour le canal général");
@@ -103,6 +113,7 @@ public class ChannelController {
      * @param channel Le canal à supprimer.
      * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("channels/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id,
                                           @RequestBody Channel channel) {
@@ -112,13 +123,15 @@ public class ChannelController {
                     .notFound()
                     .build();
         }
-
+/*
         Channel existingChannel = opt.get(); // Postman: soucis de suppression
         if (existingChannel.getId().equals(channel.getId())) {
             return ResponseEntity
                     .badRequest()
                     .body("Impossible de supprimer le canal général.");
-        } else
+        }
+         */
+        else
             channelService.delete(channel.getId());
         return ResponseEntity.ok().build();
     }
