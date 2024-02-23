@@ -1,42 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-:root{
---primary-color-blanc: #fff;
---primary-color-noir: #111015;
---primary-color-bloc_background: #19171d;
---primary-color-modal_background: #1A1D21;
---secondary-color-violet: #5e20ad;
---statut-color-wrong: #f4413b;
---statut-color-validate: #128c5b;
---statut-color-unselected: #8F8F8F;
+:root {
+  --primary-color-blanc: #fff;
+  --primary-color-noir: #111015;
+  --primary-color-bloc_background: #19171d;
+  --primary-color-modal_background: #1a1d21;
+  --secondary-color-violet: #5e20ad;
+  --statut-color-wrong: #f4413b;
+  --statut-color-validate: #128c5b;
+  --statut-color-unselected: #8f8f8f;
 
   font-family: "Inter", sans-serif;
 }
 
-body{
-background-color: #1E1E1E;
+body {
+  background-color: #1e1e1e;
 }
 
 h1 {
-color: var(--primary-color-blanc);;
-font-size: 25px;
-font-weight: 600;
+  color: var(--primary-color-blanc);
+  font-size: 25px;
+  font-weight: 600;
 }
 
 h2 {
-color: var(--primary-color-blanc);;
-font-size: 18px;
-font-weight: 600;
+  color: var(--primary-color-noir);
+  font-size: 18px;
+  font-weight: 600;
 }
 
 p {
-margin: 0;
-color: var(--primary-color-blanc);;
-font-size: 15px;
-font-weight: 400;
+  margin: 0;
+  color: var(--primary-color-blanc);
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .note {
-color: #FFFFFF78;
-font-size: 13px;
-font-weight: 500;
+  color: #ffffff78;
+  font-size: 13px;
+  font-weight: 500;
 }

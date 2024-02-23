@@ -8,8 +8,8 @@ const routes: Routes = [
   { path: 'channels', component: ChannelComponent },
   { path: 'messageForm', component: FormMessageComponent }, //A supprimer plus tard
   { path: 'users', component: UserComponent },
+  { path: 'users/:id', component: UserComponent },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
