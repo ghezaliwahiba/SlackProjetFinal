@@ -10,7 +10,6 @@ import { ListMessagesComponent } from './core/chat/list-messages/list-messages.c
 import { UserComponent } from './core/sidebar/user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormMessageComponent } from './core/chat/form-message/form-message.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-  , ReactiveFormsModule],
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

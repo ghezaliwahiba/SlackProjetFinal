@@ -5,7 +5,7 @@ import { Channel } from "./channel";
 export interface Message {
     id: number;
     localDate?: Date;
-    localTime?: Time;
+    localTime?: Date;
     content: String;
     user?: User;
     channel?: Channel;
