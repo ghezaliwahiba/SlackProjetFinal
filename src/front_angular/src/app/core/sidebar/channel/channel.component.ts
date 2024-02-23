@@ -46,6 +46,7 @@ export class ChannelComponent implements OnInit {
   }
 
   deleteChannel(id: number) {
+    this.showInputUpdate = true;
     this.channelService.deleteChannel(id).subscribe((v) => {
       this.channelService
         .getAllChannels()
