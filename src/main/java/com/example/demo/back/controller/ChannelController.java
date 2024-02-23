@@ -70,7 +70,7 @@ public class ChannelController {
                     .notFound()
                     .build();
         }
-        if (id.equals(23)) {
+        if (id.equals(82)) {
             return ResponseEntity.badRequest().build();
         } else
             return ResponseEntity.ok(opt.get());
@@ -83,7 +83,7 @@ public class ChannelController {
      * @param channel Le nouveau canal avec les informations mises à jour.
      * @return Une réponse HTTP indiquant le succès ou l'échec de la mise à jour.
      */
-    @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("channels/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id,
                                     @RequestBody Channel channel) {
@@ -96,7 +96,7 @@ public class ChannelController {
         /* Peut-être en base de donnée générer le canal général par défaut par l'id: 1
         "Impossible de mettre à jour le canal général."*/
         // Retourne une réponse BadRequest si l'ID correspond au canal général
-        if (id.equals(23)) {
+        if (channel.getId().equals(88)) {
             return ResponseEntity
                     .badRequest()
                     .body("Impossible de mettre à jour le canal général");
@@ -105,17 +105,25 @@ public class ChannelController {
             return ResponseEntity.ok().build();
         }
     }
-    @CrossOrigin(origins = "http://localhost:4200")
+
+
+   @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("channels/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
-        if (channelService.findById(id).isPresent()) {
+        Optional<Channel> opt = channelService.findById(id);
+        if (opt.isPresent()) {
+            Channel channel = opt.get();
+            // Vérifie si le canal est le canal général
+            if (channel.getChannelName().equals("Géneral")) {
+                return ResponseEntity.badRequest().body("Le canal général ne peut pas être supprimé.");
+            }
+            // Si ce n'est pas le canal général, procéder à la suppression
             channelService.delete(id);
-        return ResponseEntity.ok().build();
-        } if (id.equals(23)) {
-                return ResponseEntity.badRequest().build();
-            } else{
-                return ResponseEntity.ok().build();}
-
+            return ResponseEntity.ok().build();
+        } else {
+            // Si le canal avec l'ID spécifié n'existe pas
+            return ResponseEntity.notFound().build();
         }
+    }
     }
 

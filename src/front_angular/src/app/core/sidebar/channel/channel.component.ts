@@ -14,6 +14,7 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 export class ChannelComponent implements OnInit {
   listChannels: Channel[] = [];
   longeurChannels!: number;
+  showInputUpdate: boolean = false;
 
   constructor(private channelService: ChannelServiceComponent) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
@@ -23,7 +24,7 @@ export class ChannelComponent implements OnInit {
   }
 
   //cette methode permet de récuperer tout les chaines
-  getAllChannels() {
+  getAllChannels(): void {
     //on utilise channelService pour récupérer toutes les chaînes
     //la méthode subscribe() est utilisée pour s'abonner à un Observable.
     //L'Observable retourné par getAllChannels() émettra les chaînes récupérées lorsqu'elles seront disponibles.
@@ -53,6 +54,7 @@ export class ChannelComponent implements OnInit {
   }
 
   updateChannel(id: number, newName: string): void {
+    this.showInputUpdate = true;
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
