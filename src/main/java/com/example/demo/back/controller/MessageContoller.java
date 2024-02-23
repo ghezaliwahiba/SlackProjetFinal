@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
+@CrossOrigin
 @RestController
 public class MessageContoller {
 
@@ -31,6 +31,7 @@ public class MessageContoller {
      * @param message Le message à ajouter.
      * @return réponse HTTP indiquant le succès ou l'échec de l'ajout.
      */
+    @CrossOrigin()
     @PostMapping("messages")
     public ResponseEntity<?> addMessage(@RequestBody Message message) {
         if (message.getContent().isEmpty())
@@ -49,6 +50,7 @@ public class MessageContoller {
      * @param id L'identifiant du message à récupérer.
      * @return une Réponse HTTP contenant le message s'il est trouvé, sinon retourne une réponse NotFound.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("messages/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         Optional<Message> opt = messageService.findById(id);
@@ -67,6 +69,7 @@ public class MessageContoller {
      * @param message Le nouveau contenu du message mis à jour.
      * @return une Réponse HTTP indiquant le succès ou l'échec de la mise à jour.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("messages/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id,
                                     @RequestBody Message message) {
@@ -86,6 +89,7 @@ public class MessageContoller {
      * @param message Le message à supprimer.
      * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("messages/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id,
                                     @RequestBody Message message) {

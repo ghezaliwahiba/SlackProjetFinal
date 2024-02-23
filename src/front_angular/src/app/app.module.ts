@@ -8,6 +8,8 @@ import { ErrorComponent } from './error/error/error.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ChannelComponent } from './core/sidebar/channel/channel.component';
+import { FormMessageComponent } from './core/chat/form-message/form-message.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,9 @@ import { ChannelComponent } from './core/sidebar/channel/channel.component';
     HeaderComponent,
     ErrorComponent,
     ChannelComponent,
+    FormMessageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

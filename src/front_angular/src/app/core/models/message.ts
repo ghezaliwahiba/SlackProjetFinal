@@ -4,10 +4,9 @@ import { Channel } from "./channel";
 
 export interface Message {
     id: number;
-    localDate: Date;
-    localTime: Time;
+    localDate?: Date;
+    localTime?: Time;
     content: String;
-    user: User;
-    channel: Channel;
-// à remplir
+    user?: User;
+    channel?: Channel;
 }
