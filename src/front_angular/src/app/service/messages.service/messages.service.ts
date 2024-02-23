@@ -1,13 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Message } from '../../core/models/message';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 export class MessagesService {
+  apiUrl: String = 'http://localhost:8080/messages';
   apiUrl: String = 'http://localhost:8080/messages';
 
   constructor(private http: HttpClient) {}
