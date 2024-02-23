@@ -9,6 +9,7 @@ import { ChannelComponent } from './core/sidebar/channel/channel.component';
 import { ListMessagesComponent } from './core/chat/list-messages/list-messages.component';
 import { UserComponent } from './core/sidebar/user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormMessageComponent } from './core/chat/form-message/form-message.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChannelComponent,
     ListMessagesComponent,
     UserComponent,
+    FormMessageComponent,
   ],
   imports: [
     BrowserModule,

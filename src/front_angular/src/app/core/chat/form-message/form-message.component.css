@@ -1,0 +1,41 @@
+.div {
+        border-radius: var(--Border-radius-8, 8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: #302e33;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 15px;
+        color: var(--Primary-color-blanc, #fff);
+        padding: 15px;
+      }
+      @media (max-width: 991px) {
+        .div {
+          flex-wrap: wrap;
+        }
+      }
+      .div-2 {
+        text-overflow: ellipsis;
+        font-family: Inter, sans-serif;
+        font-weight: 400;
+        flex-grow: 1;
+      }
+      @media (max-width: 991px) {
+        .div-2 {
+          max-width: 100%;
+        }
+      }
+      .div-3 {
+        font-family: Inter, sans-serif;
+        justify-content: center;
+        border-radius: var(--Border-radius-8, 8px);
+        background-color: rgba(18, 140, 91, 0.6);
+        font-weight: 500;
+        white-space: nowrap;
+        padding: 10px 16px;
+      }
+      @media (max-width: 991px) {
+        .div-3 {
+          white-space: initial;
+        }
+      }
