@@ -8,6 +8,8 @@ import { ErrorComponent } from './error/error/error.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ChannelComponent } from './core/sidebar/channel/channel.component';
+import { MessageComponent } from './core/chat/message/message.component';
+import { ListMessagesComponent } from './core/chat/list-messages/list-messages.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { ChannelComponent } from './core/sidebar/channel/channel.component';
     HeaderComponent,
     ErrorComponent,
     ChannelComponent,
+    MessageComponent,
+    ListMessagesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
