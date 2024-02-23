@@ -8,6 +8,7 @@ import { ErrorComponent } from './error/error/error.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ChannelComponent } from './core/sidebar/channel/channel.component';
+import { UserComponent } from './core/sidebar/user/user.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ChannelComponent } from './core/sidebar/channel/channel.component';
     HeaderComponent,
     ErrorComponent,
     ChannelComponent,
+    UserComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
