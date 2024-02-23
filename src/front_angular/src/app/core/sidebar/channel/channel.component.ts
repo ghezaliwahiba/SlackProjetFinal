@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../models/channel';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -15,6 +14,7 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 export class ChannelComponent implements OnInit {
   listChannels: Channel[] = [];
   longeurChannels!: number;
+  showInputUpdate: boolean = false;
 
   constructor(private channelService: ChannelServiceComponent) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
@@ -54,6 +54,7 @@ export class ChannelComponent implements OnInit {
   }
 
   updateChannel(id: number, newName: string): void {
+    this.showInputUpdate = true;
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
