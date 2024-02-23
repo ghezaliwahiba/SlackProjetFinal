@@ -23,7 +23,7 @@ export class ChannelComponent implements OnInit {
   }
 
   //cette methode permet de récuperer tout les chaines
-  getAllChannels(): void {
+  getAllChannels() {
     //on utilise channelService pour récupérer toutes les chaînes
     //la méthode subscribe() est utilisée pour s'abonner à un Observable.
     //L'Observable retourné par getAllChannels() émettra les chaînes récupérées lorsqu'elles seront disponibles.
