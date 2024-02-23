@@ -7,11 +7,6 @@ import { User } from '../../core/models/user';
   providedIn: 'root',
 })
 export class UsersService {
-  //   constructor(private http: HttpClient) {}
-  //   getAllUsers(): Observable<User[]> {
-  //     return this.http.get<User[]>('http://localhost:8080/users');
-  //   }
-  // }
   apiUrl: string = 'http://localhost:8080/users';
   constructor(private http: HttpClient) {}
   getAllUsers(): Observable<User[]> {

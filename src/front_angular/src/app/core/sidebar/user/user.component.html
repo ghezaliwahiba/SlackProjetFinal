@@ -1,4 +1,11 @@
-<p>user works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SWAL Users</title>
+</head>
 <!-- 
     <div>
     <h2>Users</h2>
@@ -36,6 +43,12 @@
                     <button type="submit">update User</button>
                 </form> 
             -->
+                <form>
+                    <input #newNameInput type="text" />
+                    <button (click)="updateUser(user.id, newNameInput.value)">
+                        Update
+                    </button>
+                </form>
             </td>
             <td><button (click)="deleteUser(user.id)">Delete</button></td>
 

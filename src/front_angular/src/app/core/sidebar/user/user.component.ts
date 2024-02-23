@@ -59,9 +59,9 @@ export class UserComponent {
   }
   createUser(userName: string): void {
     const newUser: User = { id: this.longueurUsers + 1, userName };
+    console.log(userName);
     this.userService.addUser(newUser).subscribe(() => {
       this.getAllUsers(); //on appelle getAllUsers() pour mettre à jour la liste des chaînes après l'ajout du nouvel utilisateur.
-      console.log(newUser);
       this.createUserSuccess = true;
     });
   }
@@ -77,10 +77,12 @@ export class UserComponent {
 
   updateUser(id: number, newName: string): void {
     const updatedUser: User = { id, userName: newName };
+    console.log('this.id, this.updateUse');
+
     this.userService.updateUser(updatedUser).subscribe(() => {
       this.getAllUsers();
       this.updateUserSuccess = true;
-      console.log('this.id, this.updateUse');
+      console.log(this.id, this.updateUser);
     });
   }
 }
