@@ -1,5 +1,7 @@
 // import ENUM Active/Inactive
 
 export interface User {
-// à remplir
+  id: number;
+  userName?: string;
+  //   etat?: StateUser;
 }

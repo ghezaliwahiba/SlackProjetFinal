@@ -9,6 +9,7 @@ import { ErrorComponent } from './error/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChannelComponent } from './core/sidebar/channel/channel.component';
 import { UserComponent } from './core/sidebar/user/user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,12 @@ import { UserComponent } from './core/sidebar/user/user.component';
     ChannelComponent,
     UserComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
