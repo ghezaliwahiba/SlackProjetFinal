@@ -1,0 +1,40 @@
+.message-component {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--primary-color-blanc);
+  padding: 15px;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+
+.img {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 40px;
+  border-radius: 50%;
+  align-self: start;
+}
+
+.name-message {
+  padding-right: 30px;
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 0%;
+  flex-direction: column;
+}
+
+.name-hour {
+  display: flex;
+  gap: 10px;
+}
+
+.text-message {
+  margin-top: 10px;
+}
+
+// Animation code
+.message-component:hover {
+background-color: red;
+}
