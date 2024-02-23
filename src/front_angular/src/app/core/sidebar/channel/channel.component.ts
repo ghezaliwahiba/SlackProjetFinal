@@ -14,7 +14,19 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 export class ChannelComponent implements OnInit {
   listChannels: Channel[] = [];
   longeurChannels!: number;
-  showInputUpdate: boolean = false;
+  showBoutonGénéral: boolean = false;
+  showButtons: boolean = true;
+
+  // Définir une structure de données pour stocker l'état de l'input
+  showInput: { [key: string]: boolean } = {};
+
+  // Méthode pour mettre à jour ou annuler l'input
+  toggleInput(channelId: string) {
+    this.showInput[channelId] = !this.showInput[channelId];
+  }
+  toggleButtons() {
+    this.showButtons = !this.showButtons;
+  }
 
   constructor(private channelService: ChannelServiceComponent) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
@@ -46,7 +58,7 @@ export class ChannelComponent implements OnInit {
   }
 
   deleteChannel(id: number) {
-    this.showInputUpdate = true;
+    this.showBoutonGénéral = true;
     this.channelService.deleteChannel(id).subscribe((v) => {
       this.channelService
         .getAllChannels()
@@ -54,8 +66,17 @@ export class ChannelComponent implements OnInit {
     });
   }
 
+  getChannel(id: number) {
+    this.showBoutonGénéral = true;
+    this.channelService.getChannelById(id).subscribe((v) => {
+      this.channelService
+        .getAllChannels()
+        .subscribe((channels) => (this.listChannels = channels));
+    });
+  }
+
   updateChannel(id: number, newName: string): void {
-    this.showInputUpdate = true;
+    this.showBoutonGénéral = true;
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
