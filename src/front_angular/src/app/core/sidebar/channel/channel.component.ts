@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../models/channel';
 import { FormBuilder, FormGroup } from '@angular/forms';
