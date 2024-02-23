@@ -25,6 +25,6 @@ export class ChannelServiceComponent {
   }
 
   updateChannel(channel: Channel): Observable<Channel> {
-    return this.http.post<Channel>(`${this.apiUrl}/${channel.id}`, channel);
+    return this.http.put<Channel>(`${this.apiUrl}/${channel.id}`, channel);
   }
 }
