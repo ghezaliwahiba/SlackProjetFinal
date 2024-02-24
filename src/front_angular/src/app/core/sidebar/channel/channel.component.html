@@ -19,19 +19,19 @@
               "
             >
               <!-- Bouton pour mettre à jour le canal et basculer l'état de showInput -->
-              <button (click)="toggleInput(channel.id.toString())">
-                {{ showInput[channel.id] ? "Cancel" : "Update / Delete" }}
+              <button (click)="toggleInput()">
+                {{ showInput ? "Quitter" : "Modifier" }}
               </button>
-              <div *ngIf="showInput[channel.id]">
+              <div *ngIf="showInput">
                 <!-- L'input pour le nouveau nom du canal -->
                 <input class="nameInput" #newNameInput type="text" />
                 <!-- Bouton de soumission pour mettre à jour le canal -->
                 <button (click)="updateChannel(channel.id, newNameInput.value)">
-                  Save
+                  Sauvgarder
                 </button>
-                <!-- Bouton de suppression pour supprimer le canal -->
-                <button (click)="deleteChannel(channel.id)">Delete</button>
               </div>
+              <!-- Bouton de suppression pour supprimer le canal -->
+              <button (click)="deleteChannel(channel.id)">Suprimer</button>
             </div>
           </li>
         </ul>
@@ -44,7 +44,7 @@
             "
           >
             <input type="text" #newChannelName required />
-            <button class="submitButton" type="submit">Create</button>
+            <button class="submitButton" type="submit">Ajouter</button>
           </form>
         </div>
         <button

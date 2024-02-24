@@ -14,17 +14,12 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 export class ChannelComponent implements OnInit {
   listChannels: Channel[] = [];
   longeurChannels!: number;
-  showBoutonGénéral: boolean = false;
-  showButtons: boolean = true;
-  showInputSubmit: boolean = false;
   showForm: boolean = false;
+  showInput: boolean = false;
 
-  // Définir une structure de données pour stocker l'état de l'input
-  showInput: { [key: string]: boolean } = {};
-
-  // Méthode pour mettre à jour ou annuler l'input
-  toggleInput(channelId: string) {
-    this.showInput[channelId] = !this.showInput[channelId];
+  //Elle inverse la valeur de cette propriété. Si showInput est true, elle le définira sur false, et vice versa.
+  toggleInput() {
+    this.showInput = !this.showInput;
   }
 
   constructor(private channelService: ChannelServiceComponent) {}
@@ -57,7 +52,6 @@ export class ChannelComponent implements OnInit {
   }
 
   deleteChannel(id: number) {
-    this.showBoutonGénéral = true;
     this.channelService.deleteChannel(id).subscribe((v) => {
       this.channelService
         .getAllChannels()
@@ -66,7 +60,6 @@ export class ChannelComponent implements OnInit {
   }
 
   getChannel(id: number) {
-    this.showBoutonGénéral = true;
     this.channelService.getChannelById(id).subscribe((v) => {
       this.channelService
         .getAllChannels()
@@ -75,7 +68,6 @@ export class ChannelComponent implements OnInit {
   }
 
   updateChannel(id: number, newName: string): void {
-    this.showBoutonGénéral = true;
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
