@@ -15,3 +15,30 @@ ul {
 .canalDiv {
   padding-left: 30px;
 }
+.setting {
+  color: var(--primary-color-blanc);
+  cursor: pointer;
+}
+.setting:hover {
+  color: var(--statut-color-unselected);
+}
+
+.btns-hidden {
+  display: none;
+}
+
+.btns-open {
+  display: block;
+}
+/* Gestion des deux boutons */
+.btn-config {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--statut-color-unselected);
+  border-radius: var(--border-radius-bloc);
+}
+
+.btn:hover {
+  color: var(--primary-color-blanc);
+  background-color: var(--hover-color);
+}

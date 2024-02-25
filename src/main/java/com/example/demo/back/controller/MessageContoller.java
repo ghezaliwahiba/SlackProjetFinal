@@ -31,7 +31,7 @@ public class MessageContoller {
      * @param message Le message à ajouter.
      * @return réponse HTTP indiquant le succès ou l'échec de l'ajout.
      */
-    @CrossOrigin()
+    //@CrossOrigin()
     @PostMapping("messages")
     public ResponseEntity<?> addMessage(@RequestBody Message message) {
         if (message.getContent().isEmpty())
@@ -50,7 +50,7 @@ public class MessageContoller {
      * @param id L'identifiant du message à récupérer.
      * @return une Réponse HTTP contenant le message s'il est trouvé, sinon retourne une réponse NotFound.
      */
-    @CrossOrigin(origins = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("messages/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         Optional<Message> opt = messageService.findById(id);
@@ -69,7 +69,7 @@ public class MessageContoller {
      * @param message Le nouveau contenu du message mis à jour.
      * @return une Réponse HTTP indiquant le succès ou l'échec de la mise à jour.
      */
-    @CrossOrigin(origins = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("messages/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id,
                                     @RequestBody Message message) {
@@ -86,20 +86,17 @@ public class MessageContoller {
      * Supprime un message existant.
      *
      * @param id      L'identifiant du message à supprimer.
-     * @param message Le message à supprimer.
      * @return Réponse HTTP indiquant le succès ou l'échec de l'opération.
      */
-    @CrossOrigin(origins = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("messages/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer id,
-                                    @RequestBody Message message) {
-        Optional<Message> opt = messageService.findById(id);
-        if (opt.isEmpty() && message.getId().equals(id)) { // message.getId() != id
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        if (messageService.findById(id).isEmpty()) { // message.getId() != id - && message.getId().equals(id)
             return ResponseEntity
                     .notFound()
                     .build();
         } else
-            messageService.delete(message.getId());
+            messageService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

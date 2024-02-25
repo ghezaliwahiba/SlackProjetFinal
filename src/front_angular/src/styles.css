@@ -9,6 +9,9 @@
   --statut-color-validate: #128c5b;
   --statut-color-unselected: #8f8f8f;
 
+  --hover-color: #ffffff14;
+
+  --border-radius-bloc: 8px;
   font-family: "Inter", sans-serif;
 }
 
@@ -39,4 +42,8 @@ p {
   color: #ffffff78;
   font-size: 13px;
   font-weight: 500;
+}
+.btn {
+  color: var(--primary-color-blanc);
+  font-size: 15px;
 }
