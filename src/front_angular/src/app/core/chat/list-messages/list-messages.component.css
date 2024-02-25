@@ -1,9 +1,12 @@
 .message-component {
+  color: var(--primary-color-blanc);
+  padding: 15px;
+}
+
+.message {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  color: var(--primary-color-blanc);
-  padding: 15px;
 }
 
 .img {
@@ -61,9 +64,16 @@
   background-color: var(--hover-color);
 }
 
+.form-message-hidden {
+  display: none;
+}
+
+.form-message-open {
+  display: block;
+}
+
 /* Animation code */
 .message-component:hover {
   background-color: var(--hover-color);
   border-radius: var(--border-radius-bloc);
 }
-

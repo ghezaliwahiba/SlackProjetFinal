@@ -5,7 +5,9 @@ import { ChannelPartageService } from '../../../service/servicePartage/channel-p
 import { Channel } from '../../models/channel';
 import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
+//import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',
@@ -16,29 +18,29 @@ export class ListMessagesComponent implements OnInit {
   messagesList: Message[] = [];
   channel!: Channel;
   idChannel!: number;
+  idMessage!: number;
   messagesChannel!: Message[];
-  buttonsOpen = 'btns-hidden'; // recherche CSS
+  buttonsOpen: boolean[] = [];
+  openUpdateMessage = 'form-message-hidden';
 
   // Sur la même page: modifier le message
-  id!: number | null;
   formMessage!: FormGroup;
   lengthMessages!: number;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    
     private messagesService: MessagesService,
-    private channelPartageService: ChannelPartageService, 
-    private channelService: ChannelServiceComponent
-  ,
-    private fb: FormBuilder
+    private messagesStoreService: MessagesStoreService,
+    private channelPartageService: ChannelPartageService,
+    private channelService: ChannelServiceComponent,
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
+  //Partie Channel
   ngOnInit() {
-
-    //On récupère le channel 
+    // Partie Channel - on récupère le channel
     this.channelPartageService.currentIdChannel.subscribe((id) => {
-      this.messagesChannel = []; //j'initialise les messages du channel vide 
+      this.messagesChannel = []; //j'initialise les messages du channel vide
 
       this.idChannel = id;
       console.log(this.idChannel);
@@ -53,62 +55,67 @@ export class ListMessagesComponent implements OnInit {
         });
     });
 
-    console.log(this.channel);
-
-
-
+    // Partie Message
     this.messagesService.getAllMessages().subscribe({
       next: (messages: Message[]) => {
-        messages.forEach(element => {
-          
+        messages.forEach((element) => {
           //je trie les éléments du channel
-          if(element.channel?.id == this.idChannel){
+          if (element.channel?.id == this.idChannel) {
             console.log(element);
-            
+
             //Je rajoute les éléments dans un nouveau tableau
             this.messagesChannel.push(element);
           }
-          
         });
-        //console.log(messages[0])
         this.messagesList = messages;
+        this.messagesList.forEach(() => this.buttonsOpen.push(false));
       },
     });
   }
 
-  ngUpdate() {
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.messagesService.getMessagesById(this.id).subscribe((message) => {
-      console.log(message);
-
-      this.formMessage = this.fb.group({
-        content: [message.content || ''],
-      });
-    });
+  openButtons(index: number) {
+    this.buttonsOpen[index] = !this.buttonsOpen[index];
   }
 
-  openButtons() {
-    console.log('bouton activé');
-    if (this.buttonsOpen == 'btns-hidden') {
-      this.buttonsOpen = 'btns-open';
+  delete(id: number | undefined) {
+    if (id)
+      this.messagesService.deleteMessage(id).subscribe((message) => {
+        console.log("Message de l'ID : ", id);
+        console.log(message);
+        this.messagesService
+          .getAllMessages()
+          .subscribe((messages) => (this.messagesList = messages));
+      });
+  }
+
+  update(id: number | undefined) {
+    console.log('bouton modifié activé');
+    if (id) {
+      this.idMessage = id;
+      this.messagesService
+        .getMessagesById(this.idMessage)
+        .subscribe((message) => {
+
+          this.formMessage = this.fb.group({
+            content: [message.content || ''],
+          });
+        });
+    }
+
+    if (this.openUpdateMessage == 'form-message-hidden') {
+      this.openUpdateMessage = 'form-message-open';
     } else {
-      this.buttonsOpen = 'btns-hidden';
+      this.openUpdateMessage = 'form-message-hidden';
     }
   }
 
-  delete(id: number) {
-    this.messagesService.deleteMessage(id).subscribe((message) => {
-      console.log(message);
-      this.messagesService
-        .getAllMessages()
-        .subscribe((messages) => (this.messagesList = messages));
-    });
-  }
-
   save() {
-    console.log(this.formMessage.value);
-    this.messagesService
-      .updateMessage({ ...this.formMessage.value, id: this.id })
-      .subscribe((message) => console.log(message));
+    const newMessage: Message = {
+      ...this.formMessage.value,
+      id: this.idMessage,
+    };
+    this.messagesService.updateMessage(newMessage).subscribe();
+    this.messagesStoreService.updateMessage(newMessage);
+    // Tenter de ra-fraichir la page
   }
 }
