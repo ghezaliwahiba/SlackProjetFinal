@@ -4,3 +4,14 @@ li {
 ul {
   list-style-type: none;
 }
+
+.formSubmit {
+  padding-left: 30px;
+}
+.nav-link {
+  color: var(--primary-color-blanc);
+}
+
+.canalDiv {
+  padding-left: 30px;
+}

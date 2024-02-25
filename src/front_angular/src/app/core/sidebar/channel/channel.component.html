@@ -3,73 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Collapse</title>
   </head>
   <body>
-    <div>
-      <h2>Channels</h2>
-      <ul>
-        <li *ngFor="let channel of listChannels">
-          <a routerLink="/chat/{{channel.id}}" class="nav-link" style="padding-bottom: 0">
-            {{ channel.channelName }}
-          </a>
-          <form>
-            <input #newNameInput type="text" />
-            <button (click)="updateChannel(channel.id, newNameInput.value)">
-              Update
-            </button>
+    <div class="div-1">
+      <div>
+        <h2>Canal</h2>
+        <ul>
+          <li *ngFor="let channel of listChannels">
+            <a routerLink="messages" class="nav-link" style="padding-bottom: 0">
+              {{ channel.channelName }}
+            </a>
+            <div
+              *ngIf="
+                channel.channelName !== 'Général' && channel.channelName !== ''
+              "
+            >
+              <!-- Bouton pour mettre à jour le canal et basculer l'état de showInput -->
+              <button (click)="toggleInput()">
+                {{ showInput ? "Quitter" : "Modifier" }}
+              </button>
+              <div *ngIf="showInput">
+                <!-- L'input pour le nouveau nom du canal -->
+                <input class="nameInput" #newNameInput type="text" />
+                <!-- Bouton de soumission pour mettre à jour le canal -->
+                <button (click)="updateChannel(channel.id, newNameInput.value)">
+                  Sauvgarder
+                </button>
+              </div>
+              <!-- Bouton de suppression pour supprimer le canal -->
+              <button (click)="deleteChannel(channel.id)">Suprimer</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="canalDiv">
+        <div *ngIf="showForm">
+          <form
+            (submit)="
+              createChannel(newChannelName.value); newChannelName.value = ''
+            "
+          >
+            <input type="text" #newChannelName required />
+            <button class="submitButton" type="submit">Ajouter</button>
           </form>
-          <!--<button (click)="updateChannel(channel.id, 'New Name')">
-          
-            Update
-          </button>
-        -->
-          <button (click)="deleteChannel(channel.id)">Delete</button>
-        </li>
-      </ul>
-      <form
-        (submit)="
-          createChannel(newChannelName.value); newChannelName.value = ''
-        "
-      >
-        <input type="text" #newChannelName required />
-        <button type="submit">Create</button>
-      </form>
+        </div>
+        <button
+          class="showFormButton"
+          (click)="showForm = true"
+          *ngIf="!showForm"
+        >
+          Créer un canal
+        </button>
+      </div>
     </div>
   </body>
 </html>
-<!--
-<div>
-  <h2>Channels</h2>
-  <ul>
-    <li *ngFor="let channel of listChannels">
-      <form>
-        <span>{{ channel.channelName }}</span>
-        <input #newNameInput type="text" />
-        <button (click)="updateChannel(channel.id, newNameInput.value)">
-          Update
-        </button>
-      </form>
-      <button (click)="deleteChannel(channel.id)">Delete</button>
-    </li>
-  </ul>
-  <form
-    (submit)="createChannel(newChannelName.value); newChannelName.value = ''"
-  >
-    <input type="text" #newChannelName />
-    <button type="submit">Create</button>
-  </form>
-</div>
-
-
-<!--      
-<div class="div">
-  <div class="div-2">
-    <div class="div-3">#</div>
-    <p class="general">Général</p>
-  </div>
-  <div class="div-5">
-    <div class="div-6"><div class="div-7">1</div></div>
-  </div>
-</div>
--->

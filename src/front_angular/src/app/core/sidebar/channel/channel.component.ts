@@ -15,7 +15,13 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 export class ChannelComponent implements OnInit {
   listChannels: Channel[] = [];
   longeurChannels!: number;
-  showInputUpdate: boolean = false;
+  showForm: boolean = false;
+  showInput: boolean = false;
+
+  //Elle inverse la valeur de cette propriété. Si showInput est true, elle le définira sur false, et vice versa.
+  toggleInput() {
+    this.showInput = !this.showInput;
+  }
 
   constructor(private channelService: ChannelServiceComponent) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
@@ -54,8 +60,15 @@ export class ChannelComponent implements OnInit {
     });
   }
 
+  getChannel(id: number) {
+    this.channelService.getChannelById(id).subscribe((v) => {
+      this.channelService
+        .getAllChannels()
+        .subscribe((channels) => (this.listChannels = channels));
+    });
+  }
+
   updateChannel(id: number, newName: string): void {
-    this.showInputUpdate = true;
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
