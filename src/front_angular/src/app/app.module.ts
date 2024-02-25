@@ -10,6 +10,7 @@ import { ListMessagesComponent } from './core/chat/list-messages/list-messages.c
 import { UserComponent } from './core/sidebar/user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormMessageComponent } from './core/chat/form-message/form-message.component';
+import { ChatComponent } from './core/chat/chat.component';
 import { LayoutChatComponent } from './core/chat/layout-chat/layout-chat.component';
 
 @NgModule({
@@ -21,6 +22,8 @@ import { LayoutChatComponent } from './core/chat/layout-chat/layout-chat.compone
     ListMessagesComponent,
     UserComponent,
     FormMessageComponent,
+    ChatComponent,
+    
     LayoutChatComponent,
   ],
   imports: [

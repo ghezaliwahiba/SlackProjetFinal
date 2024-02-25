@@ -8,6 +8,7 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
   selector: 'app-channel',
   // le chemin vers le fichier de modèle
   templateUrl: './channel.component.html',
+
   //le chemin vers le fichier de style
   styleUrl: './channel.component.css',
 })
