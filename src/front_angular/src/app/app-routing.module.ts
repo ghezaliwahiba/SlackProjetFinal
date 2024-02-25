@@ -9,7 +9,11 @@ const routes: Routes = [
   { path: 'channels', component: ChannelComponent },
   { path: 'messageForm', component: FormMessageComponent }, //A supprimer plus tard
   { path: 'users', component: UserComponent },
+<<<<<<< HEAD
   { path: 'messages', component: ListMessagesComponent },
+=======
+  { path: 'edit/:id', component: ListMessagesComponent }, 
+>>>>>>> 962d1d7229fd570d0ca5501afa60ef955311cb54
 ];
 
 
