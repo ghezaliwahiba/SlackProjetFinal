@@ -7,7 +7,6 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
-//import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',

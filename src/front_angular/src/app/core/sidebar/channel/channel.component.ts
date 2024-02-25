@@ -1,3 +1,4 @@
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../models/channel';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,9 +9,10 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
   selector: 'app-channel',
   // le chemin vers le fichier de modèle
   templateUrl: './channel.component.html',
-
   //le chemin vers le fichier de style
   styleUrl: './channel.component.css',
+  standalone: true,
+  imports: [NgbAlert],
 })
 export class ChannelComponent implements OnInit {
   formChannel!: FormGroup;
