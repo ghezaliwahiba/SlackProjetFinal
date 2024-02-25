@@ -66,7 +66,8 @@ export class FormMessageComponent implements OnInit {
     console.log(newMessage);
 
     this.messageService.addMessage(newMessage).subscribe((v) => {
-      // this.router.navigate(['/messageForm'])
+       this.router.navigate(['/chat/',this.idChannel]);
+       this.ngOnInit();
       console.log(v);
     });
   }

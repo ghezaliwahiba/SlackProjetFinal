@@ -10,7 +10,7 @@
       <h2>Channels</h2>
       <ul>
         <li *ngFor="let channel of listChannels">
-          <a routerLink="messages" class="nav-link" style="padding-bottom: 0">
+          <a routerLink="/chat/{{channel.id}}" class="nav-link" style="padding-bottom: 0">
             {{ channel.channelName }}
           </a>
           <form>
