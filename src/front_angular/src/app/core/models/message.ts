@@ -7,6 +7,6 @@ export interface Message {
     date?: Date;
     hour?: Date;
     content: String;
-    user: User;
+    user?: User;
     channel: Channel;
 }

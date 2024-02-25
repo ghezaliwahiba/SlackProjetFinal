@@ -1,9 +1,12 @@
 .message-component {
+  color: var(--primary-color-blanc);
+  padding: 15px;
+}
+
+.message {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  color: var(--primary-color-blanc);
-  padding: 15px;
 }
 
 .img {
@@ -41,11 +44,11 @@
 }
 
 .btns-hidden {
-  display:none;
+  display: none;
 }
 
 .btns-open {
-  display:block;
+  display: block;
 }
 
 /* Gestion des deux boutons */
@@ -56,10 +59,17 @@
   border-radius: var(--border-radius-bloc);
 }
 
-
 .btn:hover {
   color: var(--primary-color-blanc);
   background-color: var(--hover-color);
+}
+
+.form-message-hidden {
+  display: none;
+}
+
+.form-message-open {
+  display: block;
 }
 
 /* Animation code */
