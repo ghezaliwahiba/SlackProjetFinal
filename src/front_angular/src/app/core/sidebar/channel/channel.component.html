@@ -1,60 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div class="div-1">
-      <div>
-        <h2>Canal</h2>
-        <ul>
-          <li *ngFor="let channel of listChannels">
-            <a routerLink="messages" class="nav-link" style="padding-bottom: 0">
-              {{ channel.channelName }}
-            </a>
-            <div
-              *ngIf="
-                channel.channelName !== 'Général' && channel.channelName !== ''
-              "
-            >
-              <!-- Bouton pour mettre à jour le canal et basculer l'état de showInput -->
-              <button (click)="toggleInput()">
-                {{ showInput ? "Quitter" : "Modifier" }}
-              </button>
-              <div *ngIf="showInput">
-                <!-- L'input pour le nouveau nom du canal -->
-                <input class="nameInput" #newNameInput type="text" />
-                <!-- Bouton de soumission pour mettre à jour le canal -->
-                <button (click)="updateChannel(channel.id, newNameInput.value)">
-                  Sauvgarder
-                </button>
-              </div>
-              <!-- Bouton de suppression pour supprimer le canal -->
-              <button (click)="deleteChannel(channel.id)">Suprimer</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="canalDiv">
-        <div *ngIf="showForm">
-          <form
-            (submit)="
-              createChannel(newChannelName.value); newChannelName.value = ''
-            "
-          >
-            <input type="text" #newChannelName required />
-            <button class="submitButton" type="submit">Ajouter</button>
-          </form>
-        </div>
-        <button
-          class="showFormButton"
-          (click)="showForm = true"
-          *ngIf="!showForm"
+<div class="channel-component">
+  <h2>Tous vos canaux</h2>
+  <ul>
+    <li *ngFor="let channel of listChannels; let i = index">
+      <a routerLink="messages" class="nav-link">
+        {{ channel.channelName }}
+      </a>
+      <div
+        *ngIf="channel.channelName !== 'Général' && channel.channelName !== ''"
+      >
+        <svg
+          (click)="openButtons(i)"
+          class="setting"
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          Créer un canal
-        </button>
+          <circle cx="11" cy="11" r="10.5" stroke="white" />
+          <circle cx="11.5" cy="6.5" r="1.5" fill="white" />
+          <circle cx="11.5" cy="11.5" r="1.5" fill="white" />
+          <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
+        </svg>
+
+        <div
+          [ngClass]="{
+            'btns-open': buttonsOpen[i],
+            'btns-hidden': !buttonsOpen[i]
+          }"
+        >
+          <div class="btn-config">
+            <!-- Bouton de soumission pour mettre à jour le canal -->
+            <button data-toggle="modal" data-target="#exampleModal">
+              Modifier
+            </button>
+            <button (click)="deleteChannel(channel.id)" class="btn delete-btn">
+              Supprimer
+            </button>
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">
+                      Renommer ce canal
+                    </h1>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Voici votre nom actuelle</p>
+                    <form *ngIf="formChannel" [formGroup]="formChannel">
+                      <div class="mb-3">
+                        <label for="channelName" class="form-label"
+                          >Nom actuelle</label
+                        >
+                        <input
+                          formControlName="channelName"
+                          type="text"
+                          class="form-control"
+                          id="channelName"
+                          placeholder="channelName"
+                        />
+
+                        <span
+                          *ngIf="formChannel.controls['channelName'].errors?.['minlength'] &&
+     formChannel.controls['channelName'].touched"
+                          class="text-danger"
+                          >Veuillez entrer un channel au moins de 10
+                          caracteres</span
+                        >
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+
+                    <button type="button" class="btn btn-primary">
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </body>
-</html>
+    </li>
+  </ul>
+</div>
+<div class="canalDiv">
+  <div *ngIf="showForm">
+    <form
+      (submit)="createChannel(newChannelName.value); newChannelName.value = ''"
+    >
+      <input type="text" #newChannelName required />
+      <button class="submitButton" type="submit">Ajouter</button>
+    </form>
+  </div>
+  <button class="showFormButton" (click)="showForm = true" *ngIf="!showForm">
+    Créer un canal
+  </button>
+</div>

@@ -26,6 +26,7 @@ export class ListMessagesComponent implements OnInit {
   // Sur la même page: modifier le message
   formMessage!: FormGroup;
   lengthMessages!: number;
+  
 
   constructor(
     private messagesService: MessagesService,
