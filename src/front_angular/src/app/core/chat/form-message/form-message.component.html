@@ -1,6 +1,8 @@
 <div class="div">
       <form [formGroup]="formMessage" class="div-2">
       <input formControlName="content" type="text" name="content" id="content" placeholder="Envoyer un message">
+      <!-- <input hidden="true"  formControlName="channel" type="text" name="channel" id="channel" > -->
+
       <button (click)="save()" class="div-3">Envoyer</button>
       </form>
       
@@ -8,7 +10,4 @@
 
 <hr>
 
- <div class="div">
-      <div class="div-2">Envoyer un message dans #Hello-test</div>
-      <div class="div-3">Envoyer</div>
-    </div>
+ 
