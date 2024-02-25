@@ -4,8 +4,6 @@
   gap: 20px;
   color: var(--primary-color-blanc);
   padding: 15px;
-  border: 1px solid white;
-  border-radius: 20px;
 }
 
 .img {
@@ -34,7 +32,38 @@
   margin-top: 10px;
 }
 
+.setting {
+  visibility: hidden;
+  cursor: pointer;
+}
+.message-component:hover .setting {
+  visibility: visible;
+}
+
+.btns-hidden {
+  display:none;
+}
+
+.btns-open {
+  display:block;
+}
+
+/* Gestion des deux boutons */
+.btn-config {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--statut-color-unselected);
+  border-radius: var(--border-radius-bloc);
+}
+
+
+.btn:hover {
+  color: var(--primary-color-blanc);
+  background-color: var(--hover-color);
+}
+
 /* Animation code */
 .message-component:hover {
-background-color: red;
+  background-color: var(--hover-color);
+  border-radius: var(--border-radius-bloc);
 }

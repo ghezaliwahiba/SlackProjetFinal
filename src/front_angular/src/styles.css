@@ -4,10 +4,14 @@
 --primary-color-noir: #111015;
 --primary-color-bloc_background: #19171d;
 --primary-color-modal_background: #1A1D21;
+
 --secondary-color-violet: #5e20ad;
 --statut-color-wrong: #f4413b;
 --statut-color-validate: #128c5b;
 --statut-color-unselected: #8F8F8F;
+--hover-color: #ffffff14;
+
+--border-radius-bloc: 8px;
 
   font-family: "Inter", sans-serif;
 }
@@ -39,4 +43,9 @@ font-weight: 400;
 color: #FFFFFF78;
 font-size: 13px;
 font-weight: 500;
+}
+
+.btn {
+  color: var(--primary-color-blanc);
+  font-size: 15px;
 }

@@ -1,1 +1,81 @@
 <p>header works!</p>
+<header class="chat-header">
+  <div class="chat-info">
+    <div class="name-setting">
+      <h2>Nom du canal actuel</h2>
+      <svg
+        (click)="openButtons()"
+        class="setting"
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="11" cy="11" r="10.5" stroke="white" />
+        <circle cx="11.5" cy="6.5" r="1.5" fill="white" />
+        <circle cx="11.5" cy="11.5" r="1.5" fill="white" />
+        <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
+      </svg>
+
+      <div [ngClass]="[buttonsOpen]">
+        <div class="btn-config">
+          <button (click)="modalUpdate()" class="btn update-btn">
+            Modifier le canal
+          </button>
+          <button (click)="modalDelete()" class="btn delete-btn">
+            Supprimer le canal
+          </button>
+        </div>
+      </div>
+    </div>
+    <p>4 membres</p>
+  </div>
+
+  <div class="chat-profil"></div>
+</header>
+
+<div class="modal modal-update">
+  <h1>Renommer ce canal</h1>
+
+  <form *ngIf="formChannel" [formGroup]="formChannel">
+    <div>
+      <label for="name" class="form-label">Nom actuel</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        class="form-control"
+        placeholder="name"
+      />
+
+      <span
+        *ngIf="formChannel.controls['name'].errors?.['required'] &&
+      formChannel.controls['name'].touched"
+        class="text-danger"
+        >Votre nom n'est pas valide (minimum 20 lettres)
+      </span>
+    </div>
+
+    <div class="btn-config">
+      <button (click)="cancel()" class="btn cancel-btn">Annuler</button>
+      <button (click)="update()" class="btn update-btn">
+        Renommer
+      </button>
+    </div>
+  </form>
+</div>
+
+<!--
+    <div class="modal-update">
+  <button (click)="delete(channel.id)" class="btn delete-btn">
+    Supprimer le canal
+  </button>
+</div>
+
+    <div class="modal-update">
+  <button (click)="delete(channel.id)" class="btn delete-btn">
+    Supprimer le canal
+  </button>
+</div>
+-->

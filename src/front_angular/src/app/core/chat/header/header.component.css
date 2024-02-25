@@ -1,0 +1,38 @@
+.chat-header {
+    background-color: var(--primary-color-bloc_background);
+    border-radius: var(--border-radius-bloc);
+    padding: 15px;
+}
+
+.name-setting {
+    display:flex;
+    gap: 20px;
+}
+
+.btns-hidden {
+  display:none;
+}
+
+.btns-open {
+  display:block;
+}
+
+/* Gestion des deux boutons */
+.btn-config {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--statut-color-unselected);
+  border-radius: var(--border-radius-bloc);
+}
+
+
+.btn:hover {
+  color: var(--primary-color-blanc);
+  background-color: var(--hover-color);
+}
+
+// Gestion des modales
+.modal {
+    background-color: var(--primary-color-modal_background);
+    border-radius: var(--border-radius-bloc);
+}
