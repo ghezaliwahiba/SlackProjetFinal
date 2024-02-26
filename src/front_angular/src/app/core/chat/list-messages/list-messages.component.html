@@ -1,5 +1,5 @@
 <div
-  *ngFor="let message of messagesList; let i = index"
+  *ngFor="let message of messagesChannel; let i = index"
   class="message-component"
 >
   <div class="message-input">
@@ -48,7 +48,7 @@
     </div>
 
     <form
-      *ngIf="idMessage === message.id"
+      *ngIf="idMessage === message.id && formMessage"
       [formGroup]="formMessage"
       class="form-message"
     >

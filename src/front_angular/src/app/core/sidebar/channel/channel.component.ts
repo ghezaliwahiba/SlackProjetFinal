@@ -104,4 +104,8 @@ export class ChannelComponent implements OnInit {
   }
 
   cancel() {}
+
+  changeIdChannel(id: number){
+    this.channelPartageService.changeIdChannel(id);
+  }
 }

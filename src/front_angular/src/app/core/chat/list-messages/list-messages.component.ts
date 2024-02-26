@@ -67,7 +67,7 @@ export class ListMessagesComponent implements OnInit {
         messages.forEach((element) => {
           //je trie les éléments du channel
           if (element.channel?.id == this.idChannel) {
-            console.log(element);
+            //console.log(element);
 
             //Je rajoute les éléments dans un nouveau tableau
             this.messagesChannel.push(element);
@@ -120,16 +120,13 @@ export class ListMessagesComponent implements OnInit {
       id: this.idMessage,
     };
 
-    // Mettez à jour le message via le service approprié
     this.messagesService.updateMessage(newMessage).subscribe(() => {
       this.messagesStoreService.updateMessage(newMessage);
-      // Après la mise à jour réussie, naviguez vers la même page pour actualiser
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/']);
       });
     });
 
-    // this.messagesStoreService.updateMessage(newMessage);
     this.formMessage.reset();
   }
 }
