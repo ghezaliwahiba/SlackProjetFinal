@@ -19,7 +19,7 @@
 body {
   position: relative;
   background-color: #1e1e1e;
-  margin:0%, 10%, 0%, 10%;
+  margin: 0%, 10%, 0%, 10%;
 }
 
 h1 {
@@ -53,13 +53,13 @@ p {
 }
 
 .btn-valid {
-    justify-content: center;
-    border-radius: var(--border-radius-bloc);
-    background-color: var(--statut-color-validate);
-    border: 1px solid transparent;
-    color: var(--primary-color-blanc);
-    font-weight: 500;
-    padding: 10px 16px;
+  justify-content: center;
+  border-radius: var(--border-radius-bloc);
+  background-color: var(--statut-color-validate);
+  border: 1px solid transparent;
+  color: var(--primary-color-blanc);
+  font-weight: 500;
+  padding: 10px 16px;
 }
 
 .btn-danger {
@@ -72,13 +72,18 @@ p {
   padding: 10px 16px;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-label{
+label {
+  font-size: 14px;
+  color: var(--primary-color-blanc);
+}
+
+.usersTable {
   font-size: 14px;
   color: var(--primary-color-blanc);
 }

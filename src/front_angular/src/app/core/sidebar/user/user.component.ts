@@ -14,7 +14,9 @@ export class UserComponent {
   id!: number;
   // allStatus: StateUser[] = Object.values(StateUser);
   // selected: string = 'OPTION';
-  modifyClientSuccess!: boolean;
+  deleteUserSuccess!: boolean;
+  updateUserSuccess!: boolean;
+  createUserSuccess!: boolean;
   listUsers: User[] = [];
   longueurUsers!: number;
   formUser!: FormGroup;
@@ -31,15 +33,16 @@ export class UserComponent {
     // this.userService.getUserById(this.id).subscribe((user) => {
     //   // console.log(this.selected);
 
-    //   this.formUser = this.fb.group({
-    //     id: [user.id || ''],
-    //     nom: [user.userName 
-    //       // user.userName || '',
-    //       // [Validators.required, Validators.maxLength(15)],
-    //     ],
-    //     // etat: [user.etat, [NotOptionValidator()]],
-    //   });
-    // });
+      this.formUser = this.fb.group({
+        id: [user.id || ''],
+        nom: [
+          user.userName,
+          // user.userName || '',
+          // [Validators.required, Validators.maxLength(15)],
+        ],
+        // etat: [user.etat, [NotOptionValidator()]],
+      });
+    });
     //on appelle la méthode getAllUsers() pour récupérer toutes les chaînes.
     this.getAllUsers();
   }
@@ -58,9 +61,10 @@ export class UserComponent {
   }
   createUser(userName: string): void {
     const newUser: User = { id: this.longueurUsers + 1, userName };
+    console.log(userName);
     this.userService.addUser(newUser).subscribe(() => {
       this.getAllUsers(); //on appelle getAllUsers() pour mettre à jour la liste des chaînes après l'ajout du nouvel utilisateur.
-      console.log(newUser);
+      this.createUserSuccess = true;
     });
   }
 
@@ -69,19 +73,18 @@ export class UserComponent {
       this.userService
         .getAllUsers()
         .subscribe((users) => (this.listUsers = users));
+      this.deleteUserSuccess = true;
     });
   }
 
   updateUser(id: number, newName: string): void {
     const updatedUser: User = { id, userName: newName };
+    console.log('this.id, this.updateUse');
+
     this.userService.updateUser(updatedUser).subscribe(() => {
       this.getAllUsers();
+      this.updateUserSuccess = true;
+      console.log(this.id, this.updateUser);
     });
-  }
-
-  changeIdUser(idUser: number){
-    this.userPartageService.changeIdUser(idUser);
-    console.log("id User qui change");
-    
   }
 }
