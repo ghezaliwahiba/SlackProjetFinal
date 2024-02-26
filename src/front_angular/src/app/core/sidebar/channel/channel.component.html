@@ -122,26 +122,48 @@
   </button>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
+<!-- UPDATE 
+<div [ngClass]="[modalUpdateOpen]" class="modal-channel">
+  <h1>Renommer ce canal</h1>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+  
+    <div>
+      <label for="test" class="form-label">Nom actuel du canal</label>
+      <input
+        type="text"
+        name="test"
+        id="test"
+        class="form-control"
+        placeholder="test"
+      />
+
+      <span
+        *ngIf="formChannel.controls['name'].errors?.['required'] &&
+      formChannel.controls['name'].touched"
+        class="text-danger"
+        >Votre nom n'est pas valide (minimum 20 lettres)
+      </span>
     </div>
-  </div>
-</div>
+
+    <div class="btn-config-modal">
+      <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
+      <button (click)="update(idChannel)" class="btn btn-valid">
+        Renommer
+      </button>
+    </div>
+  
+</div>-->
+
+<!-- DELETE
+<div [ngClass]="[modalDeleteOpen]" class="modal-channel">
+  <h1>Souhaitez vous définitivement supprimer ce canal ?</h1>
+  <p>Attention... vos données seront entièrement supprimées 😰</p>
+
+    <div class="btn-config-modal">
+      <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
+      <button (click)="delete(idChannel)" class="btn btn-danger">
+        Renommer
+      </button>
+    </div>
+  
+</div>-->
