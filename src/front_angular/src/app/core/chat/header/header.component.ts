@@ -11,7 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HeaderComponent {
   channelList: Channel[] = [];
+  idChannel!: number;
   buttonsOpen = 'btns-hidden'; // recherche CSS
+  modalUpdateOpen = 'modal-hidden';
+  modalDeleteOpen = 'modal-hidden';
 
   // Sur la même page: modifier le message
   id!: number | null;
@@ -32,17 +35,6 @@ export class HeaderComponent {
     });
   }
 
-  ngUpdate() {
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.channelService.getChannelById(this.id).subscribe((channel) => {
-      console.log(channel);
-
-      this.formChannel = this.fb.group({
-        content: [channel.channelName || ''],
-      });
-    });
-  }
-
   openButtons() {
     console.log('bouton activé');
     if (this.buttonsOpen == 'btns-hidden') {
@@ -52,15 +44,36 @@ export class HeaderComponent {
     }
   }
 
-  cancel() {}
-
-  update() {
-    
+  modalUpdate() {
+    console.log('MODAL UPDATE');
+    if (this.modalUpdateOpen == 'modal-hidden') {
+      this.modalUpdateOpen = 'modal-open';
+    } else {
+      this.modalUpdateOpen = 'modal-hidden';
+    }
   }
 
-  modalUpdate() {}
+  modalDelete(){
+    console.log('MODAL DELETE');
+    if (this.modalDeleteOpen == 'modal-hidden') {
+      this.modalDeleteOpen = 'modal-open';
+    } else {
+      this.modalDeleteOpen = 'modal-hidden';
+    }
+  }
 
-  modalDelete() {}
+  update(id: number | undefined) {
+    if (id)
+    this.idChannel = id;
+    this.channelService.getChannelById(this.idChannel).subscribe((channel) => {
+      //console.log(channel);
+      this.formChannel = this.fb.group({
+        channelName: [channel.channelName || ''],
+      });
+    });
+  }
+
+  cancel() {}
 
   delete(id: number) {
     this.channelService.deleteChannel(id).subscribe((channel) => {

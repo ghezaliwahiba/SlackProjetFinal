@@ -17,7 +17,9 @@
 }
 
 body {
+  position: relative;
   background-color: #1e1e1e;
+  margin:0%, 10%, 0%, 10%;
 }
 
 h1 {
@@ -44,7 +46,39 @@ p {
   font-size: 13px;
   font-weight: 500;
 }
+
 .btn {
   color: var(--primary-color-blanc);
   font-size: 15px;
+}
+
+.btn-valid {
+    justify-content: center;
+    border-radius: var(--border-radius-bloc);
+    background-color: var(--statut-color-validate);
+    border: 1px solid transparent;
+    color: var(--primary-color-blanc);
+    font-weight: 500;
+    padding: 10px 16px;
+}
+
+.btn-danger {
+  justify-content: center;
+  border-radius: var(--border-radius-bloc);
+  background-color: var(--statut-color-wrong);
+  border: 1px solid transparent;
+  color: var(--primary-color-blanc);
+  font-weight: 500;
+  padding: 10px 16px;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+label{
+  font-size: 14px;
+  color: var(--primary-color-blanc);
 }

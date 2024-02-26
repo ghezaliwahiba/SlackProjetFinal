@@ -14,6 +14,7 @@ import { FormMessageComponent } from './core/chat/form-message/form-message.comp
 import { ChatComponent } from './core/chat/chat.component';
 import { LayoutChatComponent } from './core/chat/layout-chat/layout-chat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LayoutSidebarComponent } from './core/sidebar/layout-sidebar/layout-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormMessageComponent,
     ChatComponent,
     LayoutChatComponent,
+    LayoutSidebarComponent,
   ],
   imports: [
     BrowserModule,
