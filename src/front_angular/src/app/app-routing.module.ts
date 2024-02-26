@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'users', component: UserComponent },
 
   { path: 'chat/:id', component: ChatComponent },
-  // { path: 'chat', component: ChatComponent },
   { path: 'edit/:id', component: ListMessagesComponent },
 ];
 

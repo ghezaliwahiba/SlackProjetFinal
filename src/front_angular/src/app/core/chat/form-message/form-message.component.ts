@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { ChannelPartageService } from '../../../service/servicePartage/channel-partage.service';
 import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 import { Channel } from '../../models/channel';
+import { UserPartageService } from '../../../service/userPartage/user.partage.service';
+import { User } from '../../models/user';
+import { UsersService } from '../../../service/users.service/users.service';
 
 @Component({
   selector: 'app-form-message',
@@ -15,6 +18,8 @@ export class FormMessageComponent implements OnInit {
   formMessage!: FormGroup;
   idChannel!: number;
   channel!: Channel;
+  idUser!: number;
+  user!: User;
   
 
   constructor(
@@ -22,52 +27,58 @@ export class FormMessageComponent implements OnInit {
     private channelService: ChannelServiceComponent,
     private channelPartageService: ChannelPartageService,
     private messageService: MessagesService,
-    private router: Router
+    private router: Router,
+    private userPartageService: UserPartageService,
+    private userService: UsersService,
   ) {}
 
   ngOnInit() {
+    //On récupère le channel
     this.channelPartageService.currentIdChannel.subscribe((id) => {
       this.idChannel = id;
-      console.log(this.idChannel);
+      //console.log(this.idChannel);
 
       this.channelService
         .getChannelById(this.idChannel)
         .subscribe((channel) => {
-          console.log(channel);
+          //console.log(channel);
 
           this.channel = channel;
           // this.initializeForm();
         });
     });
 
-    console.log(this.channel);
+    //console.log(this.channel);
 
-
+//On initialise le formulaire 
     this.formMessage = this.fb.group({
       content: ['', [Validators.maxLength(200), Validators.minLength(2)]],
       channel: [this.channel],
     });
+
+    //On va chercher le User 
+    this.userPartageService.currentIdUser.subscribe(idUser => {
+      this.idUser = idUser;
+      this.userService.getUserById(idUser).subscribe(user => this.user = user);
+
+    });
+
   }
 
-  // initializeForm(){
-  //   this.formMessage = this.fb.group({
-  //     content: ['', [Validators.maxLength(200), Validators.minLength(2)]],
-  //     //channel: [this.channel],
-  //   });
-
-  // }
+  
 
   save() {
     const newMessage = {
       content: this.formMessage.get('content')?.value,
       channel: this.channel,
+      user: this.user,
     }
 
     console.log(newMessage);
 
     this.messageService.addMessage(newMessage).subscribe((v) => {
        this.router.navigate(['/chat/',this.idChannel]);
-       this.ngOnInit();
+      
       console.log(v);
     });
   }

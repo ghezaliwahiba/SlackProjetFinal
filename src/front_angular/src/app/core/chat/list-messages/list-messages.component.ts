@@ -6,6 +6,7 @@ import { Channel } from '../../models/channel';
 import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',
@@ -13,7 +14,8 @@ import { MessagesStoreService } from '../../../service/messages-store/messages-s
   styleUrl: './list-messages.component.css',
 })
 export class ListMessagesComponent implements OnInit {
-  messagesList: Message[] = [];
+  //Partie Channel
+  messagesList!: Message[];
   channel!: Channel;
   idChannel!: number;
   idMessage!: number;
@@ -27,6 +29,7 @@ export class ListMessagesComponent implements OnInit {
   
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private messagesService: MessagesService,
     private messagesStoreService: MessagesStoreService,
     private channelPartageService: ChannelPartageService,
@@ -42,6 +45,7 @@ export class ListMessagesComponent implements OnInit {
 
       this.idChannel = id;
       console.log(this.idChannel);
+      
 
       this.channelService
         .getChannelById(this.idChannel)
@@ -49,11 +53,13 @@ export class ListMessagesComponent implements OnInit {
           console.log(channel);
 
           this.channel = channel;
-          // this.initializeForm();
         });
     });
 
-    // Partie Message
+    console.log(this.channel);
+
+
+
     this.messagesService.getAllMessages().subscribe({
       next: (messages: Message[]) => {
         messages.forEach((element) => {

@@ -3,8 +3,11 @@
     <h2>Users</h2>
     <ul>
         <li *ngFor="let user of listUsers">
+            <div (click)="changeIdUser(user.id)">
             {{ user.id }}
             {{ user.userName }}
+          </div>
+            
             <button (click)="updateUser(user.id, 'New Name')">Update</button>
             <button (click)="deleteUser(user.id)">Delete</button>
         </li>
