@@ -47,29 +47,17 @@ export class ChannelComponent implements OnInit {
   }
 
   deleteChannel(id: number) {
-    this.channelService.deleteChannel(id).subscribe((v) => {
-      this.channelService
-        .getAllChannels()
-        .subscribe((channels) => (this.listChannels = channels));
+    this.channelService.deleteChannel(id).subscribe(() => {
     });
   }
 
   getChannel(id: number) {
-    this.channelService.getChannelById(id).subscribe((v) => {
+    this.channelService.getChannelById(id).subscribe(() => {
       this.channelService
         .getAllChannels()
         .subscribe((channels) => (this.listChannels = channels));
     });
   }
-
-  /*
-  updateChannel(id: number, newName: string): void {
-    const updatedChannel: Channel = { id, channelName: newName };
-    this.channelService.updateChannel(updatedChannel).subscribe(() => {
-      this.getAllChannels();
-    });
-  }
-  */
 
   updateChannel(id: number | undefined) {
     if (id) {
@@ -77,15 +65,18 @@ export class ChannelComponent implements OnInit {
       this.channelService
         .getChannelById(this.idChannel)
         .subscribe((channel) => {
+          console.log(channel);
+
           this.formChannel = this.fb.group({
             channelName: [
               channel.channelName || '',
-              [Validators.maxLength(200), Validators.maxLength(10)],
+              [Validators.maxLength(10)],
             ],
           });
+
         });
     }
-
+    
     if (this.modalUpdateOpen == 'modal-hidden') {
       this.modalUpdateOpen = 'modal-open';
     } else {
@@ -94,13 +85,15 @@ export class ChannelComponent implements OnInit {
   }
 
   save() {
+    console.log("methode save lancé")
+     console.log(this.formChannel);
+    
     const newChannel: Channel = {
       ...this.formChannel.value,
       id: this.idChannel,
     };
     this.channelService.updateChannel(newChannel).subscribe();
     this.channelPartageService.updateChannel(newChannel);
-    // Tenter de ra-fraichir la page
   }
 
   cancel() {}

@@ -3,7 +3,7 @@
     <h2>Tous vos canaux</h2>
 
     <ul>
-      <li *ngFor="let channel of listChannels; let i = index">
+      <li *ngFor="let channel of listChannels, let i = index">
         <div (click)="changeIdChannel(channel.id)" class="channel-item">
           
             {{ channel.channelName }}
@@ -83,7 +83,7 @@
 
             <div class="btn-config-modal">
               <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
-              <button (click)="updateChannel(idChannel)" class="btn btn-valid">
+              <button (click)="save()" class="btn btn-valid">
                 Renommer
               </button>
             </div>
