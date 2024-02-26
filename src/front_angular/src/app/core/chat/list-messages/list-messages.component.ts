@@ -7,18 +7,15 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',
   templateUrl: './list-messages.component.html',
   styleUrl: './list-messages.component.css',
 })
-
 export class ListMessagesComponent implements OnInit {
   messagesList: Message[] = [];
   messages: Message[] = [];
-
   channel!: Channel;
   idChannel!: number;
   idMessage!: number;
@@ -32,9 +29,6 @@ export class ListMessagesComponent implements OnInit {
 
   constructor(
     private router: Router,
-
-    private activatedRoute: ActivatedRoute,
-
     private messagesService: MessagesService,
     private messagesStoreService: MessagesStoreService,
     private channelPartageService: ChannelPartageService,
@@ -57,6 +51,7 @@ export class ListMessagesComponent implements OnInit {
           console.log(channel);
 
           this.channel = channel;
+          // this.initializeForm();
         });
     });
     //Cela souscrit à des changements dans l'observable messages$ fourni par messagesStoreService.
@@ -65,12 +60,10 @@ export class ListMessagesComponent implements OnInit {
     this.messagesStoreService.messages$.subscribe(
       (ms) => (this.messagesList = ms)
     );
-    //this.messagesService.getAllMessages().subscribe({...}): Cela souscrit à l'observable renvoyé par la méthode getAllMessages()
-    // dans messagesService. Lorsque de nouveaux messages sont reçus, la fonction de rappel next est exécutée.
+    // Partie Message
     this.messagesService.getAllMessages().subscribe({
       next: (messages: Message[]) => {
-        //Cette fonction gère les nouveaux messages reçus.
-        this.messagesStoreService.messages = messages; //Cela met à jour la propriété messages dans messagesStoreService avec les messages reçus.
+        this.messagesStoreService.messages = messages;
         messages.forEach((element) => {
           //je trie les éléments du channel
           if (element.channel?.id == this.idChannel) {
@@ -94,7 +87,7 @@ export class ListMessagesComponent implements OnInit {
   delete(id: number | undefined) {
     if (id)
       this.messagesService.deleteMessage(id).subscribe((message) => {
-        console.log("Message de l'ID : ", id);
+        console.log("Message de l'ID : suprimer", id);
         console.log(message);
         this.messagesService
           .getAllMessages()

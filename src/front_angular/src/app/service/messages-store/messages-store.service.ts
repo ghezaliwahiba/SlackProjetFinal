@@ -19,6 +19,9 @@ export class MessagesStoreService {
     this._messages.next(val);
   }
 
+  setMessage(val: Message[]) {
+    this._messages.next(val);
+  }
   updateMessage(updateMessage: Message) {
     const currentMessages = [...this.messages];
     const index = currentMessages.findIndex(
@@ -27,8 +30,6 @@ export class MessagesStoreService {
     currentMessages[index] = updateMessage;
     this.messages = currentMessages;
   }
-
-
 
   addMessage(newClient: Message) {
     this.messages = [...this.messages, newClient];
