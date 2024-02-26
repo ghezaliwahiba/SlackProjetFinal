@@ -6,14 +6,19 @@ import { Channel } from '../../models/channel';
 import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',
   templateUrl: './list-messages.component.html',
   styleUrl: './list-messages.component.css',
 })
+
 export class ListMessagesComponent implements OnInit {
   messagesList: Message[] = [];
+  messages: Message[] = [];
+
   channel!: Channel;
   idChannel!: number;
   idMessage!: number;
@@ -24,14 +29,17 @@ export class ListMessagesComponent implements OnInit {
   // Sur la même page: modifier le message
   formMessage!: FormGroup;
   lengthMessages!: number;
-  
 
   constructor(
+    private router: Router,
+
+    private activatedRoute: ActivatedRoute,
+
     private messagesService: MessagesService,
     private messagesStoreService: MessagesStoreService,
     private channelPartageService: ChannelPartageService,
     private channelService: ChannelServiceComponent,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {}
 
   //Partie Channel
@@ -49,13 +57,20 @@ export class ListMessagesComponent implements OnInit {
           console.log(channel);
 
           this.channel = channel;
-          // this.initializeForm();
         });
     });
-
-    // Partie Message
+    //Cela souscrit à des changements dans l'observable messages$ fourni par messagesStoreService.
+    //Chaque fois qu'il y a un changement dans les messages,
+    //la fonction de rappel (ms) => (this.messagesList = ms) est appelée, mettant à jour this.messagesList avec les nouveaux messages.
+    this.messagesStoreService.messages$.subscribe(
+      (ms) => (this.messagesList = ms)
+    );
+    //this.messagesService.getAllMessages().subscribe({...}): Cela souscrit à l'observable renvoyé par la méthode getAllMessages()
+    // dans messagesService. Lorsque de nouveaux messages sont reçus, la fonction de rappel next est exécutée.
     this.messagesService.getAllMessages().subscribe({
       next: (messages: Message[]) => {
+        //Cette fonction gère les nouveaux messages reçus.
+        this.messagesStoreService.messages = messages; //Cela met à jour la propriété messages dans messagesStoreService avec les messages reçus.
         messages.forEach((element) => {
           //je trie les éléments du channel
           if (element.channel?.id == this.idChannel) {
@@ -65,6 +80,7 @@ export class ListMessagesComponent implements OnInit {
             this.messagesChannel.push(element);
           }
         });
+
         this.messagesList = messages;
         this.messagesList.forEach(() => this.buttonsOpen.push(false));
       },
@@ -92,7 +108,6 @@ export class ListMessagesComponent implements OnInit {
       this.messagesService
         .getMessagesById(this.idMessage)
         .subscribe((message) => {
-
           this.formMessage = this.fb.group({
             content: [message.content || ''],
           });
@@ -106,13 +121,22 @@ export class ListMessagesComponent implements OnInit {
     }
   }
 
-  save() {
+  save(message: any) {
     const newMessage: Message = {
       ...this.formMessage.value,
       id: this.idMessage,
     };
-    this.messagesService.updateMessage(newMessage).subscribe();
-    this.messagesStoreService.updateMessage(newMessage);
-    // Tenter de ra-fraichir la page
+
+    // Mettez à jour le message via le service approprié
+    this.messagesService.updateMessage(newMessage).subscribe(() => {
+      this.messagesStoreService.updateMessage(newMessage);
+      // Après la mise à jour réussie, naviguez vers la même page pour actualiser
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/']);
+      });
+    });
+
+    // this.messagesStoreService.updateMessage(newMessage);
+    this.formMessage.reset();
   }
 }

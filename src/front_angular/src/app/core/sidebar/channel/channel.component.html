@@ -1,114 +1,102 @@
 <div class="channel-component">
-  <h2>Tous vos canaux</h2>
-  <ul>
-    <li *ngFor="let channel of listChannels; let i = index">
-      <a routerLink="messages" class="nav-link">
-        {{ channel.channelName }}
-      </a>
-      <div
-        *ngIf="channel.channelName !== 'Général' && channel.channelName !== ''"
-      >
-        <svg
-          (click)="openButtons(i)"
-          class="setting"
-          width="22"
-          height="22"
-          viewBox="0 0 22 22"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="11" cy="11" r="10.5" stroke="white" />
-          <circle cx="11.5" cy="6.5" r="1.5" fill="white" />
-          <circle cx="11.5" cy="11.5" r="1.5" fill="white" />
-          <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
-        </svg>
-
-        <div
-          [ngClass]="{
-            'btns-open': buttonsOpen[i],
-            'btns-hidden': !buttonsOpen[i]
-          }"
-        >
-          <div class="btn-config">
-            <!-- Bouton de soumission pour mettre à jour le canal -->
-            <button data-toggle="modal" data-target="#exampleModal">
-              Modifier
-            </button>
-            <button (click)="deleteChannel(channel.id)" class="btn delete-btn">
-              Supprimer
-            </button>
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
+  <div class="channel">
+    <h2>Tous vos canaux</h2>
+    <ul>
+      <li *ngFor="let channel of listChannels; let i = index">
+        <div class="channel-item">
+          <a
+            routerLink="/chat/{{ channel.id }}"
+            class="nav-link"
+            style="padding-bottom: 0"
+          >
+            {{ channel.channelName }}
+          </a>
+          <div
+            *ngIf="
+              channel.channelName !== 'Général' && channel.channelName !== ''
+            "
+          >
+            <svg
+              (click)="openButtons(i)"
+              class="setting"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">
-                      Renommer ce canal
-                    </h1>
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <p>Voici votre nom actuelle</p>
-                    <form *ngIf="formChannel" [formGroup]="formChannel">
-                      <div class="mb-3">
-                        <label for="channelName" class="form-label"
-                          >Nom actuelle</label
-                        >
-                        <input
-                          formControlName="channelName"
-                          type="text"
-                          class="form-control"
-                          id="channelName"
-                          placeholder="channelName"
-                        />
+              <circle cx="11" cy="11" r="10.5" stroke="white" />
+              <circle cx="11.5" cy="6.5" r="1.5" fill="white" />
+              <circle cx="11.5" cy="11.5" r="1.5" fill="white" />
+              <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
+            </svg>
 
-                        <span
-                          *ngIf="formChannel.controls['channelName'].errors?.['minlength'] &&
-     formChannel.controls['channelName'].touched"
-                          class="text-danger"
-                          >Veuillez entrer un channel au moins de 10
-                          caracteres</span
-                        >
-                      </div>
-                    </form>
-                  </div>
-
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      Close
-                    </button>
-
-                    <button type="button" class="btn btn-primary">
-                      Save changes
-                    </button>
-                  </div>
-                </div>
+            <div
+              class="btn-gestion"
+              [ngClass]="{
+                'btns-open': buttonsOpen[i],
+                'btns-hidden': !buttonsOpen[i]
+              }"
+            >
+              <div class="btn-config">
+                <button
+                  (click)="updateChannel(channel.id)"
+                  class="btn delete-btn"
+                >
+                  Modifier
+                </button>
+                <button
+                  (click)="deleteChannel(channel.id)"
+                  class="btn delete-btn"
+                >
+                  Supprimer
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </li>
-  </ul>
+
+        <div [ngClass]="[modalUpdateOpen]" class="modal-channel">
+          <h1>Renommer ce canal</h1>
+
+          <form
+            *ngIf="idChannel === channel.id && formChannel"
+            [formGroup]="formChannel"
+          >
+            <div>
+              <label for="channelName" class="form-label"
+                >Nom actuel du canal</label
+              >
+              <input
+                type="text"
+                name="channelName"
+                id="channelName"
+                class="form-control"
+                formControlName="channelName"
+              />
+
+              <span
+                *ngIf="formChannel.controls['channelName'].errors?.['required'] &&
+      formChannel.controls['channelName'].touched"
+                class="text-danger"
+                >Votre nom n'est pas valide (minimum 20 lettres)
+              </span>
+            </div>
+
+            <div class="btn-config-modal">
+              <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
+              <button (click)="updateChannel(idChannel)" class="btn btn-valid">
+                Renommer
+              </button>
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
-<div class="canalDiv">
+
+<div class="btn-form">
   <div *ngIf="showForm">
     <form
       (submit)="createChannel(newChannelName.value); newChannelName.value = ''"
@@ -117,42 +105,10 @@
       <button class="submitButton" type="submit">Ajouter</button>
     </form>
   </div>
-  <button class="showFormButton" (click)="showForm = true" *ngIf="!showForm">
+  <button class="btn-valid showFormButton" (click)="showForm = true" *ngIf="!showForm">
     Créer un canal
   </button>
 </div>
-
-<!-- UPDATE 
-<div [ngClass]="[modalUpdateOpen]" class="modal-channel">
-  <h1>Renommer ce canal</h1>
-
-  
-    <div>
-      <label for="test" class="form-label">Nom actuel du canal</label>
-      <input
-        type="text"
-        name="test"
-        id="test"
-        class="form-control"
-        placeholder="test"
-      />
-
-      <span
-        *ngIf="formChannel.controls['name'].errors?.['required'] &&
-      formChannel.controls['name'].touched"
-        class="text-danger"
-        >Votre nom n'est pas valide (minimum 20 lettres)
-      </span>
-    </div>
-
-    <div class="btn-config-modal">
-      <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
-      <button (click)="update(idChannel)" class="btn btn-valid">
-        Renommer
-      </button>
-    </div>
-  
-</div>-->
 
 <!-- DELETE
 <div [ngClass]="[modalDeleteOpen]" class="modal-channel">
@@ -165,5 +121,4 @@
         Renommer
       </button>
     </div>
-  
 </div>-->

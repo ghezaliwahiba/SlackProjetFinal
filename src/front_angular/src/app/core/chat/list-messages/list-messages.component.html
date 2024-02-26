@@ -1,4 +1,7 @@
-<div *ngFor="let message of messagesList; let i = index" class="message-component">
+<div
+  *ngFor="let message of messagesList; let i = index"
+  class="message-component"
+>
   <div class="message-input">
     <div class="message">
       <img loading="lazy" srcset="../../../../assets/photo.jpg" class="img" />
@@ -10,7 +13,6 @@
         </div>
         <p class="text-message">{{ message.content }}</p>
       </div>
-
 
       <svg
         (click)="openButtons(i)"
@@ -27,7 +29,7 @@
         <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
       </svg>
 
-      <div [ngClass]="{'btns-open': buttonsOpen[i], 'btns-hidden': !buttonsOpen[i]}">
+      <div [ngClass]="{'btns-open': buttonsOpen[i], 'btns-hidden': !buttonsOpen[i]}" class="btn-gestion">
         <div class="btn-config">
           <button (click)="update(message.id)" class="btn update-btn">
             Modifier le message
@@ -39,9 +41,13 @@
       </div>
     </div>
 
-    <form *ngIf="idMessage === message.id" [formGroup]="formMessage" class="form-message">
+    <form
+      *ngIf="idMessage === message.id"
+      [formGroup]="formMessage"
+      class="form-message"
+    >
       <div>
-        <label for="">modifier votre message ici </label>
+        <label for="">Modifier votre message ici </label>
         <input
           formControlName="content"
           type="text"
@@ -50,7 +56,8 @@
           placeholder="Envoyer un message"
         />
       </div>
-      <button (click)="save()" class="send">Enregistrer
+      <button (click)="save(message)" class="send">
+        Enregistrer
         <!--
         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="14.5" cy="14.5" r="14.5" fill="white"/>
