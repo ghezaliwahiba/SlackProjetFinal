@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '../../models/user';
+import { UserPartageService } from '../../../service/userPartage/user.partage.service';
+import { UsersService } from '../../../service/users.service/users.service';
 
 @Component({
   selector: 'app-list-messages',
@@ -29,6 +32,7 @@ export class ListMessagesComponent implements OnInit {
   // Sur la même page: modifier le message
   formMessage!: FormGroup;
   lengthMessages!: number;
+  user!: User;
 
   constructor(
     private router: Router,
@@ -39,7 +43,9 @@ export class ListMessagesComponent implements OnInit {
     private messagesStoreService: MessagesStoreService,
     private channelPartageService: ChannelPartageService,
     private channelService: ChannelServiceComponent,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userPartageService: UserPartageService,
+    
   ) {}
 
   //Partie Channel
@@ -58,33 +64,44 @@ export class ListMessagesComponent implements OnInit {
 
           this.channel = channel;
         });
+
+      //Cela souscrit à des changements dans l'observable messages$ fourni par messagesStoreService.
+      //Chaque fois qu'il y a un changement dans les messages,
+      //la fonction de rappel (ms) => (this.messagesList = ms) est appelée, mettant à jour this.messagesList avec les nouveaux messages.
+      this.messagesStoreService.messages$.subscribe((ms) =>
+        ms.forEach((message) => {
+          if (message.channel?.id == this.idChannel) {
+            //Je rajoute les éléments dans un nouveau tableau
+            this.messagesChannel.push(message);
+          }
+        })
+      );
     });
-    //Cela souscrit à des changements dans l'observable messages$ fourni par messagesStoreService.
-    //Chaque fois qu'il y a un changement dans les messages,
-    //la fonction de rappel (ms) => (this.messagesList = ms) est appelée, mettant à jour this.messagesList avec les nouveaux messages.
-    this.messagesStoreService.messages$.subscribe(
-      (ms) => (this.messagesList = ms)
-    );
+    
+
+
+   
+
     //this.messagesService.getAllMessages().subscribe({...}): Cela souscrit à l'observable renvoyé par la méthode getAllMessages()
     // dans messagesService. Lorsque de nouveaux messages sont reçus, la fonction de rappel next est exécutée.
-    this.messagesService.getAllMessages().subscribe({
-      next: (messages: Message[]) => {
+    //this.messagesService.getAllMessages().subscribe({
+     // next: (messages: Message[]) => {
         //Cette fonction gère les nouveaux messages reçus.
-        this.messagesStoreService.messages = messages; //Cela met à jour la propriété messages dans messagesStoreService avec les messages reçus.
-        messages.forEach((element) => {
+        //this.messagesStoreService.messages = messages; //Cela met à jour la propriété messages dans messagesStoreService avec les messages reçus.
+       // messages.forEach((element) => {
           //je trie les éléments du channel
-          if (element.channel?.id == this.idChannel) {
+         // if (element.channel?.id == this.idChannel) {
             //console.log(element);
 
             //Je rajoute les éléments dans un nouveau tableau
-            this.messagesChannel.push(element);
-          }
-        });
+          //  this.messagesChannel.push(element);
+        //  }
+      //  });
 
-        this.messagesList = messages;
-        this.messagesList.forEach(() => this.buttonsOpen.push(false));
-      },
-    });
+       // this.messagesList = messages;
+       // this.messagesList.forEach(() => this.buttonsOpen.push(false));
+     // },
+  //  });
   }
 
   openButtons(index: number) {
@@ -92,7 +109,9 @@ export class ListMessagesComponent implements OnInit {
   }
 
   delete(id: number | undefined) {
-    if (id)
+    console.log("fonction delete");
+    
+    if (id){
       this.messagesService.deleteMessage(id).subscribe((message) => {
         console.log("Message de l'ID : ", id);
         console.log(message);
@@ -100,7 +119,7 @@ export class ListMessagesComponent implements OnInit {
           .getAllMessages()
           .subscribe((messages) => (this.messagesList = messages));
       });
-  }
+  }}
 
   update(id: number | undefined) {
     if (id) {
@@ -108,6 +127,7 @@ export class ListMessagesComponent implements OnInit {
       this.messagesService
         .getMessagesById(this.idMessage)
         .subscribe((message) => {
+
           this.formMessage = this.fb.group({
             content: [message.content || ''],
           });
@@ -125,6 +145,10 @@ export class ListMessagesComponent implements OnInit {
     const newMessage: Message = {
       ...this.formMessage.value,
       id: this.idMessage,
+      date: message.date,
+      hour: message.hour,
+      user: message.user,
+      channel: message.channel,
     };
 
     this.messagesService.updateMessage(newMessage).subscribe(() => {
@@ -135,5 +159,6 @@ export class ListMessagesComponent implements OnInit {
     });
 
     this.formMessage.reset();
+    this.ngOnInit();
   }
 }

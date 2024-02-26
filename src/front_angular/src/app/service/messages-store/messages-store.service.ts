@@ -9,6 +9,7 @@ export class MessagesStoreService {
   private readonly _messages: BehaviorSubject<Message[]> = new BehaviorSubject<
     Message[]
   >([]);
+  
   readonly messages$: Observable<Message[]> = this._messages.asObservable();
 
   get messages(): Message[] {
