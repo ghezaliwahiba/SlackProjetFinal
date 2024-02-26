@@ -5,9 +5,7 @@ import { ChannelPartageService } from '../../../service/servicePartage/channel-p
 import { Channel } from '../../models/channel';
 import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
-//import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',
@@ -34,7 +32,6 @@ export class ListMessagesComponent implements OnInit {
     private channelPartageService: ChannelPartageService,
     private channelService: ChannelServiceComponent,
     private fb: FormBuilder,
-    private router: Router
   ) {}
 
   //Partie Channel
@@ -90,7 +87,6 @@ export class ListMessagesComponent implements OnInit {
   }
 
   update(id: number | undefined) {
-    console.log('bouton modifié activé');
     if (id) {
       this.idMessage = id;
       this.messagesService

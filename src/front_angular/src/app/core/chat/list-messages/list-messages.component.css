@@ -64,12 +64,42 @@
   background-color: var(--hover-color);
 }
 
+/*Gestion du formulaire update */
+.form-message {margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  background: #302E33;
+  padding: 8px 15px;
+  border-radius: var(--border-radius-bloc);
+  border: 1px solid #ffffff20;
+}
+
+label{
+  color: var(--statut-color-unselected);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+input{
+  width: 95%;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--primary-color-blanc);
+}
+
 .form-message-hidden {
   display: none;
 }
 
 .form-message-open {
   display: block;
+}
+
+.send {
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  border: 1px solid transparent;
 }
 
 /* Animation code */

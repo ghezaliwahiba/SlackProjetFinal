@@ -1,5 +1,5 @@
 .chat-header {
-    background-color: var(--primary-color-bloc_background);
+    background-color: var(--primary-color-noir);
     border-radius: var(--border-radius-bloc);
     padding: 15px;
 }
@@ -31,8 +31,39 @@
   background-color: var(--hover-color);
 }
 
-// Gestion des modales
-.modal {
-    background-color: var(--primary-color-modal_background);
-    border-radius: var(--border-radius-bloc);
+/*Gestion modale et elements */
+.modal-channel {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--primary-color-modal_background);
+  border-radius: var(--border-radius-bloc);
+
+}
+
+h1, p{
+  text-align: center;
+}
+
+.btn-cancel {
+  border: 1px solid var(--statut-color-unselected);
+}
+
+.btn-config-modal {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.modal-hidden {
+  display:none;
+}
+
+.modal-open {
+  display:block;
 }

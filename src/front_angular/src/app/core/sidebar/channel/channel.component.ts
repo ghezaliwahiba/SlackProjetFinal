@@ -8,7 +8,6 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
   selector: 'app-channel',
   // le chemin vers le fichier de modèle
   templateUrl: './channel.component.html',
-
   //le chemin vers le fichier de style
   styleUrl: './channel.component.css',
 })
@@ -19,6 +18,8 @@ export class ChannelComponent implements OnInit {
   showForm: boolean = false;
   showInput: boolean = false;
   buttonsOpen: boolean[] = [];
+  modalUpdateOpen = 'modal-hidden';
+  idChannel!: number;
 
   //Elle inverse la valeur de cette propriété. Si showInput est true, elle le définira sur false, et vice versa.
   openButtons(index: number) {
@@ -74,10 +75,32 @@ export class ChannelComponent implements OnInit {
     });
   }
 
+  /*
   updateChannel(id: number, newName: string): void {
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
     });
   }
+  */
+
+  updateChannel(id: number | undefined) {
+    if (id) {
+      this.idChannel = id;
+      this.channelService
+        .getChannelById(this.idChannel)
+        .subscribe((channel) => {
+          this.formChannel = this.fb.group({
+            ChannelName: [channel.channelName || ''],
+          });
+        });
+    }
+
+    if (this.modalUpdateOpen == 'modal-hidden') {
+      this.modalUpdateOpen = 'modal-open';
+    } else {
+      this.modalUpdateOpen = 'modal-hidden';
+    }
+  }
+  cancel() {}
 }

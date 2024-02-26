@@ -1,4 +1,3 @@
-<p>header works!</p>
 <header class="chat-header">
   <div class="chat-info">
     <div class="name-setting">
@@ -35,18 +34,20 @@
   <div class="chat-profil"></div>
 </header>
 
-<div class="modal modal-update">
+
+<!-- UPDATE 
+<div [ngClass]="[modalUpdateOpen]" class="modal-channel">
   <h1>Renommer ce canal</h1>
 
-  <form *ngIf="formChannel" [formGroup]="formChannel">
+  
     <div>
-      <label for="name" class="form-label">Nom actuel</label>
+      <label for="test" class="form-label">Nom actuel du canal</label>
       <input
         type="text"
-        name="name"
-        id="name"
+        name="test"
+        id="test"
         class="form-control"
-        placeholder="name"
+        placeholder="test"
       />
 
       <span
@@ -57,25 +58,25 @@
       </span>
     </div>
 
-    <div class="btn-config">
-      <button (click)="cancel()" class="btn cancel-btn">Annuler</button>
-      <button (click)="update()" class="btn update-btn">
+    <div class="btn-config-modal">
+      <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
+      <button (click)="update(idChannel)" class="btn btn-valid">
         Renommer
       </button>
     </div>
-  </form>
-</div>
+  
+</div>-->
 
-<!--
-    <div class="modal-update">
-  <button (click)="delete(channel.id)" class="btn delete-btn">
-    Supprimer le canal
-  </button>
-</div>
+<!-- DELETE
+<div [ngClass]="[modalDeleteOpen]" class="modal-channel">
+  <h1>Souhaitez vous définitivement supprimer ce canal ?</h1>
+  <p>Attention... vos données seront entièrement supprimées 😰</p>
 
-    <div class="modal-update">
-  <button (click)="delete(channel.id)" class="btn delete-btn">
-    Supprimer le canal
-  </button>
-</div>
--->
+    <div class="btn-config-modal">
+      <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
+      <button (click)="delete(idChannel)" class="btn btn-danger">
+        Renommer
+      </button>
+    </div>
+  
+</div>-->
