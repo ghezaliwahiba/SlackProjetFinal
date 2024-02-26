@@ -14,7 +14,6 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 })
 export class ChannelComponent implements OnInit {
   formChannel!: FormGroup;
-  idChannel!: number;
   listChannels: Channel[] = [];
   longeurChannels!: number;
   showForm: boolean = false;
@@ -74,36 +73,11 @@ export class ChannelComponent implements OnInit {
         .subscribe((channels) => (this.listChannels = channels));
     });
   }
-  updateChannel(id: number | undefined) {
-    console.log('bouton modifié activé');
-    if (id) {
-      this.idChannel = id;
-      this.channelService
-        .getChannelById(this.idChannel)
-        .subscribe((channel) => {
-          this.formChannel = this.fb.group({
-            content: [channel.channelName || ''],
-          });
-        });
-    }
 
-    /*
-  updateChannel(id: number) {
-    this.channelService
-      .getChannelById(id)
-      .subscribe((channel) => console.log(channel));
-    this.formChannel = this.fb.group({
-      channelName: [
-        channel.channelName || '',
-        [(Validators.required, Validators.maxLength(15))],
-      ],
-    });
-    
-
+  updateChannel(id: number, newName: string): void {
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
     });
-    */
   }
 }

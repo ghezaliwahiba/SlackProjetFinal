@@ -9,8 +9,12 @@ import { ChannelServiceComponent } from '../channel.service/channel.service.comp
 export class ChannelPartageService {
   // channelGeneral!: Channel ;
   // this.ChannelServiceComponent.getChannelById(0).subscribe(channel => this.channelGeneral = channel);
-  
+
+  //BehaviorSubject qui stocke un number, initialement défini à 1.
+  //Un BehaviorSubject est un type d'observable qui émet toujours la valeur 
+  //actuelle à ses abonnés lorsqu'ils s'abonnent.
   private idChannelSource = new BehaviorSubject<number>(1);
+  
   currentIdChannel = this.idChannelSource.asObservable();
 
   // private channelSource =new BehaviorSubject<Channel>()

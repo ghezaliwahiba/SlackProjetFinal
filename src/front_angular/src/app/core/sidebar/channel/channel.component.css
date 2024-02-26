@@ -5,16 +5,29 @@ ul {
   list-style-type: none;
 }
 
+.channel-item {
+  display: flex; /* Utiliser Flexbox pour aligner les éléments sur la même ligne */
+  align-items: center; /* Aligner les éléments verticalement au centre */
+}
+
+.setting {
+  margin-left: 10px; /* Marge à gauche pour espacer l'icône SVG du nom du canal */
+}
+
+.btn-gestion {
+  display: none; /* Par défaut, masquer les boutons de gestion */
+}
+
+.btns-open {
+  display: block; /* Afficher les boutons de gestion si ouverts */
+}
 .formSubmit {
-  padding-left: 30px;
+  padding-left: 20px;
 }
 .nav-link {
   color: var(--primary-color-blanc);
 }
 
-.canalDiv {
-  padding-left: 30px;
-}
 .setting {
   color: var(--primary-color-blanc);
   cursor: pointer;
@@ -32,6 +45,7 @@ ul {
 }
 /* Gestion des deux boutons */
 .btn-config {
+  
   display: flex;
   flex-direction: column;
   border: 1px solid var(--statut-color-unselected);
@@ -41,4 +55,8 @@ ul {
 .btn:hover {
   color: var(--primary-color-blanc);
   background-color: var(--hover-color);
+}
+
+.btn-form {
+  padding-left: 30px;
 }
