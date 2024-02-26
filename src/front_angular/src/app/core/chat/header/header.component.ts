@@ -3,6 +3,7 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 import { Channel } from '../../models/channel';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ChannelPartageService } from '../../../service/servicePartage/channel-partage.service';
 
 @Component({
   selector: 'app-header',
@@ -19,11 +20,13 @@ export class HeaderComponent {
   // Sur la même page: modifier le message
   id!: number | null;
   formChannel!: FormGroup;
+  channel!: Channel;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private channelService: ChannelServiceComponent,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private channelPartageService: ChannelPartageService,
   ) {}
 
   ngOnInit() {
@@ -33,6 +36,13 @@ export class HeaderComponent {
         this.channelList = channels;
       },
     });
+
+    this.channelPartageService.currentIdChannel.subscribe(idChannel =>{
+      this.channelService.getChannelById(idChannel).subscribe(channel =>{
+        this.channel = channel;
+
+      })
+    })
   }
 
   openButtons() {

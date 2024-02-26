@@ -77,7 +77,7 @@ export class FormMessageComponent implements OnInit {
     console.log(newMessage);
 
     this.messageService.addMessage(newMessage).subscribe((v) => {
-       this.router.navigate(['/chat/',this.idChannel]);
+      //  this.router.navigate(['/chat/',this.idChannel]);
       
       console.log(v);
     });
