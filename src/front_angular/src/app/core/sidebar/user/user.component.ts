@@ -29,20 +29,20 @@ export class UserComponent {
   ) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
   ngOnInit() {
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.userService.getUserById(this.id).subscribe((user) => {
-      // console.log(this.selected);
+    // this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    // this.userService.getUserById(this.id).subscribe((user) => {
+    // console.log(this.selected);
 
-      this.formUser = this.fb.group({
-        id: [user.id, ''],
-        nom: [
-          user.userName,
-          // user.userName  '',
-          // [Validators.required, Validators.maxLength(15)],
-        ],
-        // etat: [user.etat, [NotOptionValidator()]],
-      });
-    });
+    // this.formUser = this.fb.group({
+    // id: [user.id, ''],
+    // nom: [
+    // user.userName,
+    // user.userName  '',
+    // [Validators.required, Validators.maxLength(15)],
+    // ],
+    // etat: [user.etat, [NotOptionValidator()]],
+    // });
+    // });
     //on appelle la méthode getAllUsers() pour récupérer toutes les chaînes.
     this.getAllUsers();
   }
