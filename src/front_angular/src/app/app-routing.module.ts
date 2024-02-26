@@ -11,10 +11,8 @@ const routes: Routes = [
   { path: 'messageForm', component: FormMessageComponent }, //A supprimer plus tard
   { path: 'users', component: UserComponent },
   { path: 'chat/:id', component: ChatComponent },
-  // { path: 'chat', component: ChatComponent },
-  { path: 'edit/:id', component: ListMessagesComponent }, 
+  { path: 'edit/:id', component: ListMessagesComponent },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

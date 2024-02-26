@@ -31,7 +31,7 @@
   background-color: var(--hover-color);
 }
 
-// Gestion des modales
+/* Gestion des modales */
 .modal {
     background-color: var(--primary-color-modal_background);
     border-radius: var(--border-radius-bloc);

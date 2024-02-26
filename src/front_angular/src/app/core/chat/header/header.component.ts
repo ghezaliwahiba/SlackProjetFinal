@@ -26,7 +26,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.channelService.getAllChannels().subscribe({
       next: (channels: Channel[]) => {
-        console.log(channels);
+        //console.log(channels);
         this.channelList = channels;
       },
     });
@@ -35,7 +35,7 @@ export class HeaderComponent {
   ngUpdate() {
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.channelService.getChannelById(this.id).subscribe((channel) => {
-      console.log(channel);
+      //console.log(channel);
 
       this.formChannel = this.fb.group({
         content: [channel.channelName || ''],

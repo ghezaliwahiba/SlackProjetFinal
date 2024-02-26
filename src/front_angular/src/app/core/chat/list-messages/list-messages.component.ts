@@ -13,10 +13,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './list-messages.component.css',
 })
 export class ListMessagesComponent implements OnInit {
-  messagesList: Message[] = [];
+  //Partie Channel
+  messagesList!: Message[];
   channel!: Channel;
   idChannel!: number;
   messagesChannel!: Message[];
+
+  //Partie message
   buttonsOpen = 'btns-hidden'; // recherche CSS
 
   // Sur la même page: modifier le message
@@ -26,22 +29,20 @@ export class ListMessagesComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    
     private messagesService: MessagesService,
-    private channelPartageService: ChannelPartageService, 
-    private channelService: ChannelServiceComponent
-  ,
+    private channelPartageService: ChannelPartageService,
+    private channelService: ChannelServiceComponent,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-
-    //On récupère le channel 
+    //On récupère le channel
     this.channelPartageService.currentIdChannel.subscribe((id) => {
-      this.messagesChannel = []; //j'initialise les messages du channel vide 
+      this.messagesChannel = []; //j'initialise les messages du channel vide
 
       this.idChannel = id;
       console.log(this.idChannel);
+      
 
       this.channelService
         .getChannelById(this.idChannel)
@@ -49,29 +50,19 @@ export class ListMessagesComponent implements OnInit {
           console.log(channel);
 
           this.channel = channel;
-          // this.initializeForm();
         });
     });
 
-    console.log(this.channel);
-
-
-
+    //On récupère tous les messages puis les messages du channel
     this.messagesService.getAllMessages().subscribe({
       next: (messages: Message[]) => {
-        messages.forEach(element => {
-          
+        messages.forEach((element) => {
           //je trie les éléments du channel
-          if(element.channel?.id == this.idChannel){
-            console.log(element);
-            
+          if (element.channel?.id == this.idChannel) {
             //Je rajoute les éléments dans un nouveau tableau
             this.messagesChannel.push(element);
           }
-          
         });
-        //console.log(messages[0])
-        this.messagesList = messages;
       },
     });
   }
@@ -96,13 +87,14 @@ export class ListMessagesComponent implements OnInit {
     }
   }
 
-  delete(id: number) {
+  delete(id: number | undefined) {
+    if(id != null){
     this.messagesService.deleteMessage(id).subscribe((message) => {
       console.log(message);
       this.messagesService
         .getAllMessages()
         .subscribe((messages) => (this.messagesList = messages));
-    });
+    });}
   }
 
   save() {
