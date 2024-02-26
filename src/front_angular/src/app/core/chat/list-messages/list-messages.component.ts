@@ -74,7 +74,7 @@ export class ListMessagesComponent implements OnInit {
         messages.forEach((element) => {
           //je trie les éléments du channel
           if (element.channel?.id == this.idChannel) {
-            console.log(element);
+            //console.log(element);
 
             //Je rajoute les éléments dans un nouveau tableau
             this.messagesChannel.push(element);

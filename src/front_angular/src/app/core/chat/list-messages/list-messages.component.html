@@ -1,5 +1,5 @@
 <div
-  *ngFor="let message of messagesList; let i = index"
+  *ngFor="let message of messagesChannel; let i = index"
   class="message-component"
 >
   <div class="message-input">
@@ -8,7 +8,7 @@
 
       <div class="name-message">
         <div class="name-hour">
-          <p class="text-name">{{ message.user.userName }}</p>
+          <p class="text-name">{{ message?.user?.userName }}</p>
           <p class="note">{{ message.hour }}</p>
         </div>
         <p class="text-message">{{ message.content }}</p>

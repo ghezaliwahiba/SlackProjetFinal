@@ -4,14 +4,10 @@
 
     <ul>
       <li *ngFor="let channel of listChannels; let i = index">
-        <div class="channel-item">
-          <a
-            routerLink="/chat/{{ channel.id }}"
-            class="nav-link"
-            style="padding-bottom: 0"
-          >
+        <div (click)="changeIdChannel(channel.id)" class="channel-item">
+          
             {{ channel.channelName }}
-          </a>
+          
           <div
             class="setting-open"
             *ngIf="
