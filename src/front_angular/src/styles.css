@@ -41,6 +41,19 @@ p {
   font-weight: 400;
 }
 
+li {
+  text-decoration: none;
+  color: var(--primary-color-blanc);
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 0px;
+}
+
 .note {
   color: #ffffff78;
   font-size: 13px;

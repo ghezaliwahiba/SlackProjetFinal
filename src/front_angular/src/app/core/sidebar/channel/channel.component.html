@@ -1,6 +1,7 @@
 <div class="channel-component">
   <div class="channel">
     <h2>Tous vos canaux</h2>
+
     <ul>
       <li *ngFor="let channel of listChannels; let i = index">
         <div class="channel-item">
@@ -12,6 +13,7 @@
             {{ channel.channelName }}
           </a>
           <div
+            class="setting-open"
             *ngIf="
               channel.channelName !== 'Général' && channel.channelName !== ''
             "
@@ -43,13 +45,13 @@
                   (click)="updateChannel(channel.id)"
                   class="btn delete-btn"
                 >
-                  Modifier
+                  Modifier le canal
                 </button>
                 <button
                   (click)="deleteChannel(channel.id)"
                   class="btn delete-btn"
                 >
-                  Supprimer
+                  Supprimer le canal
                 </button>
               </div>
             </div>
@@ -93,21 +95,27 @@
         </div>
       </li>
     </ul>
-  </div>
-</div>
 
-<div class="btn-form">
-  <div *ngIf="showForm">
-    <form
-      (submit)="createChannel(newChannelName.value); newChannelName.value = ''"
-    >
-      <input type="text" #newChannelName required />
-      <button class="submitButton" type="submit">Ajouter</button>
-    </form>
+    <div class="btn-form">
+      <div *ngIf="showForm">
+        <form
+          (submit)="
+            createChannel(newChannelName.value); newChannelName.value = ''
+          "
+        >
+          <input type="text" #newChannelName required />
+          <button class="submitButton" type="submit">Ajouter</button>
+        </form>
+      </div>
+      <button
+        class="btn-valid showFormButton"
+        (click)="showForm = true"
+        *ngIf="!showForm"
+      >
+        Créer un canal
+      </button>
+    </div>
   </div>
-  <button class="btn-valid showFormButton" (click)="showForm = true" *ngIf="!showForm">
-    Créer un canal
-  </button>
 </div>
 
 <!-- DELETE

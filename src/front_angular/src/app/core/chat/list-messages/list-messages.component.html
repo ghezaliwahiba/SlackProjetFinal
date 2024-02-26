@@ -48,7 +48,7 @@
     </div>
 
     <form
-      *ngIf="idMessage === message.id"
+      *ngIf="idMessage === message.id && formMessage"
       [formGroup]="formMessage"
       class="form-message"
     >

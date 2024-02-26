@@ -1,17 +1,26 @@
-li {
-  text-decoration: none;
-}
-ul {
-  list-style-type: none;
+.channel-component {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--statut-color-unselected);
+  border-radius: var(--border-radius-bloc);
 }
 
 .channel-item {
-  display: flex; /* Utiliser Flexbox pour aligner les éléments sur la même ligne */
-  align-items: center; /* Aligner les éléments verticalement au centre */
+  display: flex;
+  justify-content: space-between;
+}
+
+.setting-open {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: end;
 }
 
 .setting {
-  margin-left: 10px; /* Marge à gauche pour espacer l'icône SVG du nom du canal */
+  margin-left: 10px;
 }
 
 .btn-gestion {
@@ -56,9 +65,6 @@ ul {
   background-color: var(--hover-color);
 }
 
-.btn-form {
-  padding-left: 30px;
-}
 /* Gestion des deux boutons */
 .btn-config {
   display: flex;
