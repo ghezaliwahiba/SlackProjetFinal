@@ -39,8 +39,6 @@
               }"
             >
               <div class="btn-config">
-                <!-- Bouton de soumission pour mettre à jour le canal -->
-                <input class="nameInput" #newNameInput type="text" />
                 <button
                   (click)="updateChannel(channel.id)"
                   class="btn delete-btn"
@@ -57,6 +55,42 @@
             </div>
           </div>
         </div>
+
+        <div [ngClass]="[modalUpdateOpen]" class="modal-channel">
+          <h1>Renommer ce canal</h1>
+
+          <form
+            *ngIf="idChannel === channel.id && formChannel"
+            [formGroup]="formChannel"
+          >
+            <div>
+              <label for="channelName" class="form-label"
+                >Nom actuel du canal</label
+              >
+              <input
+                type="text"
+                name="channelName"
+                id="channelName"
+                class="form-control"
+                formControlName="channelName"
+              />
+
+              <span
+                *ngIf="formChannel.controls['channelName'].errors?.['required'] &&
+      formChannel.controls['channelName'].touched"
+                class="text-danger"
+                >Votre nom n'est pas valide (minimum 20 lettres)
+              </span>
+            </div>
+
+            <div class="btn-config-modal">
+              <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
+              <button (click)="updateChannel(idChannel)" class="btn btn-valid">
+                Renommer
+              </button>
+            </div>
+          </form>
+        </div>
       </li>
     </ul>
   </div>
@@ -71,42 +105,10 @@
       <button class="submitButton" type="submit">Ajouter</button>
     </form>
   </div>
-  <button class="showFormButton" (click)="showForm = true" *ngIf="!showForm">
+  <button class="btn-valid showFormButton" (click)="showForm = true" *ngIf="!showForm">
     Créer un canal
   </button>
 </div>
-
-<!-- UPDATE 
-<div [ngClass]="[modalUpdateOpen]" class="modal-channel">
-  <h1>Renommer ce canal</h1>
-
-  
-    <div>
-      <label for="test" class="form-label">Nom actuel du canal</label>
-      <input
-        type="text"
-        name="test"
-        id="test"
-        class="form-control"
-        placeholder="test"
-      />
-
-      <span
-        *ngIf="formChannel.controls['name'].errors?.['required'] &&
-      formChannel.controls['name'].touched"
-        class="text-danger"
-        >Votre nom n'est pas valide (minimum 20 lettres)
-      </span>
-    </div>
-
-    <div class="btn-config-modal">
-      <button (click)="cancel()" class="btn btn-cancel">Annuler</button>
-      <button (click)="update(idChannel)" class="btn btn-valid">
-        Renommer
-      </button>
-    </div>
-  
-</div>-->
 
 <!-- DELETE
 <div [ngClass]="[modalDeleteOpen]" class="modal-channel">
@@ -119,5 +121,4 @@
         Renommer
       </button>
     </div>
-  
 </div>-->

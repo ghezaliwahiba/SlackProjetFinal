@@ -12,6 +12,7 @@ import { MessagesStoreService } from '../../../service/messages-store/messages-s
   templateUrl: './list-messages.component.html',
   styleUrl: './list-messages.component.css',
 })
+
 export class ListMessagesComponent implements OnInit {
   messagesList: Message[] = [];
   channel!: Channel;

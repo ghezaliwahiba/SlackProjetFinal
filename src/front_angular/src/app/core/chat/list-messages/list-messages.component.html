@@ -27,7 +27,7 @@
         <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
       </svg>
 
-      <div [ngClass]="{'btns-open': buttonsOpen[i], 'btns-hidden': !buttonsOpen[i]}">
+      <div [ngClass]="{'btns-open': buttonsOpen[i], 'btns-hidden': !buttonsOpen[i]}" class="btn-gestion">
         <div class="btn-config">
           <button (click)="update(message.id)" class="btn update-btn">
             Modifier le message
@@ -41,7 +41,7 @@
 
     <form *ngIf="idMessage === message.id" [formGroup]="formMessage" class="form-message">
       <div>
-        <label for="">modifier votre message ici </label>
+        <label for="">Modifier votre message ici </label>
         <input
           formControlName="content"
           type="text"
