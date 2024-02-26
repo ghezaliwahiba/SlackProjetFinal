@@ -19,6 +19,7 @@
     </ul>
 </div> 
 -->
+
 <div style="max-width: 700px" *ngIf="createUserSuccess" class="col align-self-center alert alert-success">
     <p class="my-0" style="text-align: center">Client modifié avec succès.</p>
 </div>
@@ -37,12 +38,7 @@
             <td>{{user.userName}}</td>
             <!-- <td><button (click)="updateUser(user.id, newUserName.value)" placeholder="re">Update</button></td> -->
             <td>
-                <!--                 
-                    <form (submit)="updateUser(user.id, newUserName.value); newUserName.value = ''">
-                    <input type="text" #newUserName required />
-                    <button type="submit">update User</button>
-                </form> 
-            -->
+
                 <form>
                     <input #newNameInput type="text" />
                     <button (click)="updateUser(user.id, newNameInput.value)">

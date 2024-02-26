@@ -70,7 +70,7 @@ public class ChannelController {
                     .notFound()
                     .build();
         }
-        if (id.equals(82)) {
+        if (id.equals(113)) {
             return ResponseEntity.badRequest().build();
         } else
             return ResponseEntity.ok(opt.get());
@@ -96,7 +96,7 @@ public class ChannelController {
         /* Peut-être en base de donnée générer le canal général par défaut par l'id: 1
         "Impossible de mettre à jour le canal général."*/
         // Retourne une réponse BadRequest si l'ID correspond au canal général
-        if (channel.getId().equals(88)) {
+        if (channel.getId().equals(113)) {
             return ResponseEntity
                     .badRequest()
                     .body("Impossible de mettre à jour le canal général");
@@ -114,7 +114,7 @@ public class ChannelController {
         if (opt.isPresent()) {
             Channel channel = opt.get();
             // Vérifie si le canal est le canal général
-            if (channel.getChannelName().equals("Géneral")) {
+            if (channel.getChannelName().equals("Général")) {
                 return ResponseEntity.badRequest().body("Le canal général ne peut pas être supprimé.");
             }
             // Si ce n'est pas le canal général, procéder à la suppression
