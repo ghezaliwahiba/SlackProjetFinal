@@ -1,53 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SWAL Users</title>
-</head>
-<!-- 
-    <div>
-    <h2>Users</h2>
-    <ul>
-        <li *ngFor="let user of listUsers">
-            <div (click)="changeIdUser(user.id)">
-            {{ user.id }}
-            {{ user.userName }}
-          </div>
-            
-            <button (click)="updateUser(user.id, 'New Name')">Update</button>
-            <button (click)="deleteUser(user.id)">Delete</button>
-        </li>
-    </ul>
-</div> 
--->
-
-<div style="max-width: 700px" *ngIf="createUserSuccess" class="col align-self-center alert alert-success">
-    <p class="my-0" style="text-align: center">Client modifié avec succès.</p>
-</div>
-<div style="max-width: 700px" *ngIf="deleteUserSuccess" class="col align-self-center alert alert-success">
-    <p class="my-0" style="text-align: center">Client modifié avec succès.</p>
-</div>
-<div style="max-width: 700px" *ngIf="updateUserSuccess" class="col align-self-center alert alert-success">
-    <p class="my-0" style="text-align: center">Client modifié avec succès.</p>
-</div>
-
-<h2>Users</h2>
-<ul class="usersTable" *ngFor="let user of listUsers">
-    <li>
-        getAllUsers
-        {{user.userName}}
+<div class="user-component">
+  <h2>Tous les utilisateurs de l'espace de travail</h2>
+  <ul>
+    <li *ngFor="let user of listUsers">
+      {{ user.userName }}
     </li>
-</ul>
-<!-- 
-<table class="usersTable" border="1px">
-    <tbody>
-        <tr *ngFor="let user of listUsers">
-            <td>{{user.userName}}</td>
-            <td><button (click)="updateUser(user.id, newUserName.value)" placeholder="re">Update</button></td>
-            <td>
-
-
-    </tbody>
-</table> -->
+  </ul>
+</div>
