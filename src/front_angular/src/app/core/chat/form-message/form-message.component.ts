@@ -20,7 +20,6 @@ export class FormMessageComponent implements OnInit {
   channel!: Channel;
   idUser!: number;
   user!: User;
-  
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +28,7 @@ export class FormMessageComponent implements OnInit {
     private messageService: MessagesService,
     private router: Router,
     private userPartageService: UserPartageService,
-    private userService: UsersService,
+    private userService: UsersService
   ) {}
 
   ngOnInit() {
@@ -50,35 +49,33 @@ export class FormMessageComponent implements OnInit {
 
     //console.log(this.channel);
 
-//On initialise le formulaire 
+    //On initialise le formulaire
     this.formMessage = this.fb.group({
       content: ['', [Validators.maxLength(200), Validators.minLength(2)]],
       channel: [this.channel],
     });
 
-    //On va chercher le User 
-    this.userPartageService.currentIdUser.subscribe(idUser => {
+    //On va chercher le User
+    this.userPartageService.currentIdUser.subscribe((idUser) => {
       this.idUser = idUser;
-      this.userService.getUserById(idUser).subscribe(user => this.user = user);
-
+      this.userService
+        .getUserById(idUser)
+        .subscribe((user) => (this.user = user));
     });
-
   }
-
-  
 
   save() {
     const newMessage = {
       content: this.formMessage.get('content')?.value,
       channel: this.channel,
       user: this.user,
-    }
+    };
 
-    console.log(newMessage);
+    console.log('newMessage -- ' + newMessage);
 
     this.messageService.addMessage(newMessage).subscribe((v) => {
-      //  this.router.navigate(['/chat/',this.idChannel]);
-      
+      this.router.navigate(['/chat/', this.idChannel]);
+
       console.log(v);
     });
   }
