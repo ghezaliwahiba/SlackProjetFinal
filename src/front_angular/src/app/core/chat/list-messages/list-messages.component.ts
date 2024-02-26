@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './list-messages.component.html',
   styleUrl: './list-messages.component.css',
 })
+
 export class ListMessagesComponent implements OnInit {
   messagesList: Message[] = [];
   messages: Message[] = [];
