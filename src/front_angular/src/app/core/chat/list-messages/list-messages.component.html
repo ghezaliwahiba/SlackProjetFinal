@@ -1,19 +1,62 @@
-<h1>Liste des messages tests</h1>
+<div *ngFor="let message of messagesList; let i = index" class="message-component">
+  <div class="message-input">
+    <div class="message">
+      <img loading="lazy" srcset="../../../../assets/photo.jpg" class="img" />
 
-<div *ngFor="let message of messagesList" class="message-component">
-  <img loading="lazy" srcset="../../../../assets/photo.jpg" class="img" />
+      <div class="name-message">
+        <div class="name-hour">
+          <p class="text-name">{{ message.user?.userName }}</p>
+          <p class="note">{{ message.hour }}</p>
+        </div>
+        <p class="text-message">{{ message.content }}</p>
+      </div>
 
-  <div class="name-message">
-    <div class="name-hour">
-      <p class="text-name">{{ message.user.userName }}</p>
-      <p class="note">{{ message.hour }}</p>
+
+      <svg
+        (click)="openButtons(i)"
+        class="setting"
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="11" cy="11" r="10.5" stroke="white" />
+        <circle cx="11.5" cy="6.5" r="1.5" fill="white" />
+        <circle cx="11.5" cy="11.5" r="1.5" fill="white" />
+        <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
+      </svg>
+
+      <div [ngClass]="{'btns-open': buttonsOpen[i], 'btns-hidden': !buttonsOpen[i]}">
+        <div class="btn-config">
+          <button (click)="update(message.id)" class="btn update-btn">
+            Modifier le message
+          </button>
+          <button (click)="delete(message.id)" class="btn delete-btn">
+            Supprimer le message
+          </button>
+        </div>
+      </div>
     </div>
-    <p class="text-message">{{ message.content }}</p>
+
+    <form *ngIf="idMessage === message.id" [formGroup]="formMessage" class="form-message">
+      <div>
+        <label for="">modifier votre message ici </label>
+        <input
+          formControlName="content"
+          type="text"
+          name="content"
+          id="content"
+          placeholder="Envoyer un message"
+        />
+      </div>
+      <button (click)="save()" class="send">Enregistrer
+        <!--
+        <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14.5" cy="14.5" r="14.5" fill="white"/>
+          <path d="M22.5158 8.01275C22.9478 6.81775 21.7898 5.65975 20.5948 6.09275L5.9898 11.3748C4.7908 11.8088 4.6458 13.4448 5.7488 14.0838L10.4108 16.7828L14.5738 12.6198C14.7624 12.4376 15.015 12.3368 15.2772 12.3391C15.5394 12.3414 15.7902 12.4465 15.9756 12.6319C16.161 12.8173 16.2662 13.0682 16.2685 13.3303C16.2708 13.5925 16.17 13.8451 15.9878 14.0338L11.8248 18.1968L14.5248 22.8587C15.1628 23.9617 16.7988 23.8158 17.2328 22.6178L22.5158 8.01275Z" fill="#128C5B"/>
+          </svg>-->
+      </button>
+    </form>
   </div>
 </div>
-
-<!--
-  uppercase
-  date:'mm:ss'
-| message.hourdatePipe.transform(date:'mm:ss')
--->

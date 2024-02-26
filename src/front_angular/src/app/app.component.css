@@ -1,0 +1,8 @@
+main {
+    display: flex;
+}
+section{
+    padding: 20px;
+    background-color: var(--primary-color-bloc_background);
+    border-radius: var(--border-radius-bloc);
+}

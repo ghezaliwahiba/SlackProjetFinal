@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../models/channel';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChannelServiceComponent } from '../../../service/channel.service/channel.service.component';
 
 @Component({
@@ -12,19 +12,31 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
   styleUrl: './channel.component.css',
 })
 export class ChannelComponent implements OnInit {
+  formChannel!: FormGroup;
+  idChannel!: number;
   listChannels: Channel[] = [];
   longeurChannels!: number;
-  showInputUpdate: boolean = false;
+  showForm: boolean = false;
+  showInput: boolean = false;
+  buttonsOpen: boolean[] = [];
 
-  constructor(private channelService: ChannelServiceComponent) {}
+  //Elle inverse la valeur de cette propriété. Si showInput est true, elle le définira sur false, et vice versa.
+  openButtons(index: number) {
+    this.buttonsOpen[index] = !this.buttonsOpen[index];
+  }
+
+  constructor(
+    private channelService: ChannelServiceComponent,
+    private fb: FormBuilder
+  ) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
-  ngOnInit(): void {
+  ngOnInit() {
     //on appelle la méthode getAllChannels() pour récupérer toutes les chaînes.
     this.getAllChannels();
   }
 
   //cette methode permet de récuperer tout les chaines
-  getAllChannels(): void {
+  getAllChannels() {
     //on utilise channelService pour récupérer toutes les chaînes
     //la méthode subscribe() est utilisée pour s'abonner à un Observable.
     //L'Observable retourné par getAllChannels() émettra les chaînes récupérées lorsqu'elles seront disponibles.
@@ -33,11 +45,12 @@ export class ChannelComponent implements OnInit {
       console.log(channels);
       //on les stockes dans la variable listChannels.
       this.listChannels = channels;
+      this.listChannels.forEach(() => this.buttonsOpen.push(false));
       console.log(channels);
     });
   }
 
-  createChannel(channelName: string): void {
+  createChannel(channelName: string) {
     const newChannel: Channel = { id: this.longeurChannels + 1, channelName };
     this.channelService.addChannel(newChannel).subscribe(() => {
       this.getAllChannels(); //on appelle getAllChannels() pour mettre à jour la liste des chaînes après l'ajout de la nouvelle chaîne.
@@ -53,11 +66,43 @@ export class ChannelComponent implements OnInit {
     });
   }
 
-  updateChannel(id: number, newName: string): void {
-    this.showInputUpdate = true;
+  getChannel(id: number) {
+    this.channelService.getChannelById(id).subscribe((v) => {
+      this.channelService
+        .getAllChannels()
+        .subscribe((channels) => (this.listChannels = channels));
+    });
+  }
+  updateChannel(id: number | undefined) {
+    console.log('bouton modifié activé');
+    if (id) {
+      this.idChannel = id;
+      this.channelService
+        .getChannelById(this.idChannel)
+        .subscribe((channel) => {
+          this.formChannel = this.fb.group({
+            content: [channel.channelName || ''],
+          });
+        });
+    }
+
+    /*
+  updateChannel(id: number) {
+    this.channelService
+      .getChannelById(id)
+      .subscribe((channel) => console.log(channel));
+    this.formChannel = this.fb.group({
+      channelName: [
+        channel.channelName || '',
+        [(Validators.required, Validators.maxLength(15))],
+      ],
+    });
+    
+
     const updatedChannel: Channel = { id, channelName: newName };
     this.channelService.updateChannel(updatedChannel).subscribe(() => {
       this.getAllChannels();
     });
+    */
   }
 }

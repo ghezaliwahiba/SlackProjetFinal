@@ -1,11 +1,12 @@
 .message-component {
+  color: var(--primary-color-blanc);
+  padding: 15px;
+}
+
+.message {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  color: var(--primary-color-blanc);
-  padding: 15px;
-  border: 1px solid white;
-  border-radius: 20px;
 }
 
 .img {
@@ -34,7 +35,75 @@
   margin-top: 10px;
 }
 
+.setting {
+  visibility: hidden;
+  cursor: pointer;
+}
+.message-component:hover .setting {
+  visibility: visible;
+}
+
+.btns-hidden {
+  display: none;
+}
+
+.btns-open {
+  display: block;
+}
+
+/* Gestion des deux boutons */
+.btn-config {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--statut-color-unselected);
+  border-radius: var(--border-radius-bloc);
+}
+
+.btn:hover {
+  color: var(--primary-color-blanc);
+  background-color: var(--hover-color);
+}
+
+/*Gestion du formulaire update */
+.form-message {margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  background: #302E33;
+  padding: 8px 15px;
+  border-radius: var(--border-radius-bloc);
+  border: 1px solid #ffffff20;
+}
+
+label{
+  color: var(--statut-color-unselected);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+input{
+  width: 95%;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--primary-color-blanc);
+}
+
+.form-message-hidden {
+  display: none;
+}
+
+.form-message-open {
+  display: block;
+}
+
+.send {
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
 /* Animation code */
 .message-component:hover {
-background-color: red;
+  background-color: var(--hover-color);
+  border-radius: var(--border-radius-bloc);
 }
