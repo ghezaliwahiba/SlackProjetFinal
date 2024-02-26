@@ -31,27 +31,19 @@
 </div>
 
 <h2>Users</h2>
-<table border="1px">
+<ul class="usersTable" *ngFor="let user of listUsers">
+    <li>
+        {{user.userName}}
+    </li>
+</ul>
+<!-- 
+<table class="usersTable" border="1px">
     <tbody>
         <tr *ngFor="let user of listUsers">
-            <td>{{user.id}}</td>
             <td>{{user.userName}}</td>
-            <!-- <td><button (click)="updateUser(user.id, newUserName.value)" placeholder="re">Update</button></td> -->
+            <td><button (click)="updateUser(user.id, newUserName.value)" placeholder="re">Update</button></td>
             <td>
 
-                <form>
-                    <input #newNameInput type="text" />
-                    <button (click)="updateUser(user.id, newNameInput.value)">
-                        Update
-                    </button>
-                </form>
-            </td>
-            <td><button (click)="deleteUser(user.id)">Delete</button></td>
 
     </tbody>
-</table>
-
-<form (submit)="createUser(newUserName.value); newUserName.value = ''">
-    <input type="text" #newUserName required />
-    <button type="submit">Create</button>
-</form>
+</table> -->
