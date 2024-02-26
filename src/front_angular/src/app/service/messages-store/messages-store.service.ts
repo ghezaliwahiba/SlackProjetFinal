@@ -11,7 +11,7 @@ export class MessagesStoreService {
   >([]);
   readonly messages$: Observable<Message[]> = this._messages.asObservable();
 
-  get messages() : Message[]{
+  get messages(): Message[] {
     return this._messages.getValue();
   }
 
@@ -26,6 +26,15 @@ export class MessagesStoreService {
     );
     currentMessages[index] = updateMessage;
     this.messages = currentMessages;
+  }
+
+
+
+  addMessage(newClient: Message) {
+    this.messages = [...this.messages, newClient];
+  }
+  deleteMessageById(id: number) {
+    this.messages = this.messages.filter((message) => message.id !== id);
   }
 
   constructor() {}
