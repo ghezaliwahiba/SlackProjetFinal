@@ -17,11 +17,12 @@ export class ChannelPartageService {
 
   currentIdChannel = this.idChannelSource.asObservable();
 
-  // private channelSource =new BehaviorSubject<Channel>()
-
+  
   constructor() {}
 
   changeIdChannel(id: number) {
+    console.log("change id");
+    
     this.idChannelSource.next(id);
   }
 }

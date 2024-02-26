@@ -29,7 +29,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.channelService.getAllChannels().subscribe({
       next: (channels: Channel[]) => {
-        console.log(channels);
+        //console.log(channels);
         this.channelList = channels;
       },
     });

@@ -7,6 +7,7 @@ import { ChannelServiceComponent } from '../../../service/channel.service/channe
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessagesStoreService } from '../../../service/messages-store/messages-store.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-messages',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class ListMessagesComponent implements OnInit {
   messagesList: Message[] = [];
   messages: Message[] = [];
+
   channel!: Channel;
   idChannel!: number;
   idMessage!: number;
@@ -29,6 +31,9 @@ export class ListMessagesComponent implements OnInit {
 
   constructor(
     private router: Router,
+
+    private activatedRoute: ActivatedRoute,
+
     private messagesService: MessagesService,
     private messagesStoreService: MessagesStoreService,
     private channelPartageService: ChannelPartageService,
@@ -51,17 +56,16 @@ export class ListMessagesComponent implements OnInit {
           console.log(channel);
 
           this.channel = channel;
-          // this.initializeForm();
         });
     });
-    //Cela souscrit à des changements dans l'observable messages$ fourni par messagesStoreService. 
-    //Chaque fois qu'il y a un changement dans les messages, 
+    //Cela souscrit à des changements dans l'observable messages$ fourni par messagesStoreService.
+    //Chaque fois qu'il y a un changement dans les messages,
     //la fonction de rappel (ms) => (this.messagesList = ms) est appelée, mettant à jour this.messagesList avec les nouveaux messages.
     this.messagesStoreService.messages$.subscribe(
       (ms) => (this.messagesList = ms)
     );
-   //this.messagesService.getAllMessages().subscribe({...}): Cela souscrit à l'observable renvoyé par la méthode getAllMessages()
-   // dans messagesService. Lorsque de nouveaux messages sont reçus, la fonction de rappel next est exécutée.
+    //this.messagesService.getAllMessages().subscribe({...}): Cela souscrit à l'observable renvoyé par la méthode getAllMessages()
+    // dans messagesService. Lorsque de nouveaux messages sont reçus, la fonction de rappel next est exécutée.
     this.messagesService.getAllMessages().subscribe({
       next: (messages: Message[]) => {
         //Cette fonction gère les nouveaux messages reçus.

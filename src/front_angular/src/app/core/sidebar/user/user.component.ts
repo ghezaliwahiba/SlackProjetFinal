@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { UsersService } from '../../../service/users.service/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UserPartageService } from '../../../service/userPartage/user.partage.service';
 
 @Component({
   selector: 'app-user',
@@ -21,23 +22,24 @@ export class UserComponent {
   constructor(
     private userService: UsersService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userPartageService: UserPartageService,
   ) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
   ngOnInit() {
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.userService.getUserById(this.id).subscribe((user) => {
-      // console.log(this.selected);
+    // this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    // this.userService.getUserById(this.id).subscribe((user) => {
+    //   // console.log(this.selected);
 
-      this.formUser = this.fb.group({
-        id: [user.id || ''],
-        nom: [user.userName 
-          // user.userName || '',
-          // [Validators.required, Validators.maxLength(15)],
-        ],
-        // etat: [user.etat, [NotOptionValidator()]],
-      });
-    });
+    //   this.formUser = this.fb.group({
+    //     id: [user.id || ''],
+    //     nom: [user.userName 
+    //       // user.userName || '',
+    //       // [Validators.required, Validators.maxLength(15)],
+    //     ],
+    //     // etat: [user.etat, [NotOptionValidator()]],
+    //   });
+    // });
     //on appelle la méthode getAllUsers() pour récupérer toutes les chaînes.
     this.getAllUsers();
   }
@@ -75,5 +77,11 @@ export class UserComponent {
     this.userService.updateUser(updatedUser).subscribe(() => {
       this.getAllUsers();
     });
+  }
+
+  changeIdUser(idUser: number){
+    this.userPartageService.changeIdUser(idUser);
+    console.log("id User qui change");
+    
   }
 }

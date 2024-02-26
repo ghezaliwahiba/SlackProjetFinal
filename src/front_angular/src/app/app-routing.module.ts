@@ -8,7 +8,6 @@ import { ListMessagesComponent } from './core/chat/list-messages/list-messages.c
 
 const routes: Routes = [
   { path: 'chat/:id', component: ChatComponent },
-  // { path: 'chat', component: ChatComponent },
   { path: 'edit/:id', component: ListMessagesComponent },
 ];
 
