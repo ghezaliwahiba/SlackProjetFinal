@@ -8,7 +8,7 @@
 
       <div class="name-message">
         <div class="name-hour">
-          <p class="text-name">{{ message.user?.userName }}</p>
+          <p class="text-name">{{ message.user.userName }}</p>
           <p class="note">{{ message.hour }}</p>
         </div>
         <p class="text-message">{{ message.content }}</p>
@@ -29,7 +29,13 @@
         <circle cx="11.5" cy="16.5" r="1.5" fill="white" />
       </svg>
 
-      <div [ngClass]="{'btns-open': buttonsOpen[i], 'btns-hidden': !buttonsOpen[i]}" class="btn-gestion">
+      <div
+        [ngClass]="{
+          'btns-open': buttonsOpen[i],
+          'btns-hidden': !buttonsOpen[i]
+        }"
+        class="btn-gestion"
+      >
         <div class="btn-config">
           <button (click)="update(message.id)" class="btn update-btn">
             Modifier le message

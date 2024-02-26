@@ -25,19 +25,19 @@ export class UserComponent {
     private userService: UsersService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private userPartageService: UserPartageService,
+    private userPartageService: UserPartageService
   ) {}
   //Cette méthode est appelée automatiquement lorsqu'un composant Angular est initialisé.
   ngOnInit() {
-    // this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    // this.userService.getUserById(this.id).subscribe((user) => {
-    //   // console.log(this.selected);
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.userService.getUserById(this.id).subscribe((user) => {
+      // console.log(this.selected);
 
       this.formUser = this.fb.group({
-        id: [user.id || ''],
+        id: [user.id, ''],
         nom: [
           user.userName,
-          // user.userName || '',
+          // user.userName  '',
           // [Validators.required, Validators.maxLength(15)],
         ],
         // etat: [user.etat, [NotOptionValidator()]],
@@ -46,7 +46,6 @@ export class UserComponent {
     //on appelle la méthode getAllUsers() pour récupérer toutes les chaînes.
     this.getAllUsers();
   }
-
   getAllUsers(): void {
     //on utilise userService pour récupérer toutes les chaînes
     //la méthode subscribe() est utilisée pour s'abonner à un Observable.
